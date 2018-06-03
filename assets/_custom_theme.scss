@@ -1,0 +1,7 @@
+$theme-colors: (
+  "primary": hsl(210, 80%, 20%),
+  "secondary": hsl(210, 50%, 50%)
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";
+// @import "node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss";
