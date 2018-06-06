@@ -9,7 +9,7 @@
     "dev": "HOST=0.0.0.0 PORT=8080 nuxt",
     "dev-debug": "PORT=8080 node --inspect-brk=9229 --nolazy node_modules/.bin/nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "HOST=0.0.0.0 PORT=8080 nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
@@ -17,19 +17,18 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.1",
     "@nuxtjs/markdownit": "^1.2.1",
-    "bootstrap-italia": "^0.7.6",
-    "bootstrap-vue": "^2.0.0-rc.9",
-    "npm": "^6.0.1",
-    "nuxt": "^1.0.0",
-    "nuxt-i18n": "^3.2.3"
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "nuxt": "^1.4.0",
+    "nuxt-i18n": "^3.3.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "eslint": "^4.15.0",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0",
+    "bootstrap-italia": "^0.9.1",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-vue": "^4.5.0",
     "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1"
+    "sass-loader": "^7.0.2"
   }
 }

@@ -50,15 +50,19 @@ module.exports = {
       locales: [
         {
           code: 'it',
+          iso: 'it-IT',
           name: 'Italiano'
         },
         {
           code: 'en',
+          iso: 'en-UK',
           name: 'English'
         }
       ],
       defaultLocale: 'it',
-      fallbackLocale: 'it',
+      vueI18n: {
+        fallbackLocale: 'it'
+      },
       strategy: 'prefix'
     }]
   ],

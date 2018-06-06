@@ -1,7 +1,14 @@
+$savoy-blue: #4b61d1;
+$italy-green: #008C45;
+$italy-white: #F4F5F0;
+$italy-red: #CD212A;
+$title-color: desaturate(darken($savoy-blue, 20%), 40%);
+
 $theme-colors: (
-  "primary": hsl(210, 80%, 20%),
-  "secondary": hsl(210, 50%, 50%)
+  "primary": desaturate(darken($savoy-blue, 20%), 40%),
+  "secondary": $savoy-blue
 );
 
-@import "node_modules/bootstrap/scss/bootstrap";
-// @import "node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss";
+// @import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss";
+@import "node_modules/bootstrap-italia/src/icons/css/italia-icon-font.css";

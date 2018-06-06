@@ -1,10 +1,10 @@
 <template>
     <header id="site-header" class="bg-primary text-light">
-        <b-container fluid>
+        <b-container>
             <b-row align-v="center">
                 <b-col>
-                    <h1>UniJobs</h1>
-                    <p class="subtitle">Academic jobs in \(country.name)</p>
+                    <h1>UniJobs.it</h1>
+                    <p class="subtitle">Your hub for academic jobs in Italy</p>
                 </b-col>
             </b-row>
         </b-container>
