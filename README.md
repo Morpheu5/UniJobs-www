@@ -1,6 +1,6 @@
-# UniJobs.it web front-end
+# [UniJobs.it](http://www.unijobs.it) web front-end
 
-> unijobs.it
+Finding a job in the Italian academia is already a nightmare. Searching for it should not.
 
 ## Build Setup
 
