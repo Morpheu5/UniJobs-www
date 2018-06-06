@@ -12,4 +12,4 @@ ADD package.json /app
 WORKDIR /app
 RUN npm install
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
