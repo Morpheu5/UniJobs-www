@@ -2,7 +2,9 @@
   <div class="default.vue">
     <SiteHeader/>
     <MainNav/>
-    <nuxt/>
+    <b-container>
+      <nuxt/>
+    </b-container>
   </div>
 </template>
 
@@ -14,10 +16,14 @@ export default {
   components: {
     SiteHeader,
     MainNav
+  },
+  created: () => {
+    // console.log(this.switchLocalePath('en'))
   }
 }
 </script>
 
 <style lang="scss">
+@import '@/assets/_custom_theme.scss';
 
 </style>

@@ -1,20 +1,9 @@
 import Vue from 'vue'
 
-// let langToName = (code) => {
-//     switch (code) {
-//         case 'it':
-//             return 'Italiano';
-//         case 'en':
-//             return 'English';
-//         default:
-//             return `[${code.toUpperCase()}]`;
-//     }
-// };
-
-// Vue.mixin({
-//     filters: {
-//         flagify: (code) => {
-//             return langToName(code);
-//         }
-//     }
-// })
+Vue.mixin({
+    computed: {
+        currentLocale() {
+            return this.$i18n.locales.find((e) => e.code === this.$i18n.locale)
+        }
+    }
+})

@@ -1,12 +1,13 @@
-$savoy-blue: #4b61d1;
+$italy-blue: #0066cc;
 $italy-green: #008C45;
 $italy-white: #F4F5F0;
 $italy-red: #CD212A;
-$title-color: desaturate(darken($savoy-blue, 20%), 40%);
+$title-color: desaturate(darken($italy-blue, 20%), 40%);
 
 $theme-colors: (
-  "primary": desaturate(darken($savoy-blue, 20%), 40%),
-  "secondary": $savoy-blue
+  "primary": $italy-blue,
+  "secondary": desaturate(darken($italy-blue, 30%), 20%),
+  "light": white
 );
 
 // @import "node_modules/bootstrap/scss/bootstrap";

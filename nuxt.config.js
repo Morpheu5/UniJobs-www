@@ -48,20 +48,19 @@ module.exports = {
     }],
     [ 'nuxt-i18n', {
       locales: [
-        {
-          code: 'it',
-          iso: 'it-IT',
-          name: 'Italiano'
-        },
-        {
-          code: 'en',
-          iso: 'en-UK',
-          name: 'English'
-        }
+        { code: 'it', iso: 'it-IT', name: 'Italiano' },
+        { code: 'en', iso: 'en-UK', name: 'English' }
       ],
-      defaultLocale: 'it',
       vueI18n: {
-        fallbackLocale: 'it'
+        fallbackLocale: 'it',
+        messages: {
+          it: {
+            headline: 'Lavori accademici in Italia'
+          },
+          en: {
+            headline: 'Academic jobs in Italy'
+          }
+        }
       },
       strategy: 'prefix'
     }]
