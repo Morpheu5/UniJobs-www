@@ -1,34 +1,38 @@
 <template>
-    <section class="job-card">
-        <b-card no-body>
-            <b-tabs bottom pills no-fade>
-                <b-tab title="Language" disabled />
+    <b-row>
+        <b-col>
+            <div>
+                <h2>{{ job.title[currentLocale.code] }}</h2>
+                <section class="job-description">
+                    <ContentBlock
+                        v-for="block in job.content_blocks"
+                        :key="`${job.id}-${block.id}`"
+                        :type="block.block_type"
+                        :locale="currentLocale"
+                        :data="block"
+                        />
+                </section>
+            </div>
+        </b-col>
+        <b-col cols="4">
+            <b-card>
+            <h4>At a glance</h4>
+            <p>Position: <strong>Research Assistant</strong></p>
+            <p>Institution: <strong>Università del Pavè</strong></p>
+            <p>Salary: <strong>&euro; 20.000 - 25.000</strong> (gross)</p>
+            <b-button href="#" size="sm" variant="primary">Apply here!</b-button>
+            </b-card>
+        </b-col>
 
-                <b-tab :title="l.name" class="job-translation" v-for="l in $i18n.locales" :key="l">
-                    <div>
-                        <h2>{{ job.body.title.find((e) => { return e.lang == l.code }).content }}</h2>
-                        <section class="job-description">
-                            <ContentPart
-                                v-for="child in job.body.children"
-                                :key="child.id"
-                                :type="child.type"
-                                :lang="l.code"
-                                :data="child"
-                                />
-                        </section>
-                    </div>
-                </b-tab>
-            </b-tabs>
-        </b-card>
-    </section>
+    </b-row>
 </template>
 
 <script>
-import ContentPart from '~/components/ContentPart'
+import ContentBlock from '~/components/ContentBlock'
 
 export default {
     components: {
-        ContentPart
+        ContentBlock
     },
     validate ({ params }) {
         return /^\d+$/.test(params.id)

@@ -48,8 +48,8 @@ module.exports = {
     }],
     [ 'nuxt-i18n', {
       locales: [
-        { code: 'it', iso: 'it-IT', name: 'Italiano' },
-        { code: 'en', iso: 'en-UK', name: 'English' }
+        { code: 'en', iso: 'en-UK', name: 'English' },
+        { code: 'it', iso: 'it-IT', name: 'Italiano' }
       ],
       vueI18n: {
         fallbackLocale: 'it',
@@ -62,7 +62,8 @@ module.exports = {
           }
         }
       },
-      strategy: 'prefix'
+      strategy: 'prefix',
+      rootRedirect: 'it'
     }]
   ],
   plugins: [
