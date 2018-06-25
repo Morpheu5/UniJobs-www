@@ -6,8 +6,8 @@
             <b-collapse is-nav id="nav_collapse">
 
                 <b-navbar-nav>
-                    <b-nav-item href="/">Home</b-nav-item>
-                    <b-nav-item href="#">About Us</b-nav-item>
+                    <b-nav-item :href="localePath('index')">Home</b-nav-item>
+                    <b-nav-item :href="localePath('about')">About Us</b-nav-item>
                 </b-navbar-nav>
 
                 <!-- Right aligned nav items -->

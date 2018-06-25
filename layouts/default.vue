@@ -1,5 +1,5 @@
 <template>
-  <div class="default.vue">
+  <div class="default layout">
     <SiteHeader/>
     <MainNav/>
     <div class="page-sheet py-5">
@@ -21,9 +21,6 @@ export default {
     SiteHeader,
     MainNav,
     SiteFooter
-  },
-  created: () => {
-    // console.log(this.switchLocalePath('en'))
   }
 }
 </script>
