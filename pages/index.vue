@@ -21,7 +21,7 @@ export default {
     JobsList
   },
   async asyncData ({ app, params }) {
-    let [ jobsResponse ] = await Promise.all([
+    const [ jobsResponse ] = await Promise.all([
       app.$axios.get('/contents?content_type=job')
     ])
     return { jobs: jobsResponse.data }
