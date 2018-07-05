@@ -8,7 +8,7 @@ Finding a job in the Italian academia is already a nightmare. Searching for it s
 # install dependencies
 $ npm install # Or yarn install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:8080
 $ npm run dev
 
 # build for production and launch server
