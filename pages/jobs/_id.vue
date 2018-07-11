@@ -17,10 +17,10 @@
         <b-col cols="4">
             <b-card>
             <h4>At a glance</h4>
-            <p>Position: <strong>Research Assistant</strong></p>
+            <p v-if="job.metadata.job_title">Job title: <strong>{{ job.metadata.job_title[currentLocale.code].content }}</strong></p>
             <p>Institution: <strong>Università del Pavè</strong></p>
-            <p>Salary: <strong>&euro; 20.000 - 25.000</strong> (gross)</p>
-            <b-button href="#" size="sm" variant="primary">Apply here!</b-button>
+            <p v-if="job.metadata.salary">Salary: <strong>&euro; {{ job.metadata.salary }}</strong><span v-if="job.metadata.tax_status"> ({{ job.metadata.tax_status }})</span></p>
+            <b-button :href="job.metadata.url[currentLocale.code].content" size="sm" variant="primary">Apply here!</b-button>
             </b-card>
         </b-col>
 
