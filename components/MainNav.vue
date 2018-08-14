@@ -12,25 +12,16 @@
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
-                    <!-- <b-nav-form>
-                        <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
-                        <b-button size="sm" class="my-2 my-sm-0" type="submit" variant="primary">Search</b-button>
-                    </b-nav-form> -->
-        
                     <b-nav-item-dropdown :text="currentLocale.name" right>
                         <b-dropdown-item v-for="locale in $i18n.locales" :key="locale.code" :href="switchLocalePath(locale.code)">{{ locale.name }}</b-dropdown-item>
                     </b-nav-item-dropdown>
 
-                    <b-nav-item-dropdown right>
-                        <!-- Using button-content slot -->
-                        <template slot="button-content">
-                            User
-                        </template>
+                    <b-nav-item-dropdown right v-if="loggedIn" text="User">
                         <b-dropdown-item href="#">Profile</b-dropdown-item>
-                        <b-dropdown-item href="#">Signout</b-dropdown-item>
+                        <b-dropdown-item @click="doTheLogout">Logout</b-dropdown-item>
                     </b-nav-item-dropdown>
+                    <b-nav-item :href="localePath('user-login')" right v-else>Login</b-nav-item>
                 </b-navbar-nav>
-
             </b-collapse>
         </b-container>
     </b-navbar>
@@ -42,14 +33,34 @@
 
 
 <script>
-console.log(this);
 export default {
     methods: {
-
+        doTheLogout() {
+            console.log(this.$store);
+            this.$axios
+                .post('/logout',
+                    null,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${this.$store.state.unijobs_magic_token}`
+                        }
+                    }
+                )
+                .then(_response => {
+                    this.$store.commit('updateAuthToken', null);
+                    this.$router.push({ path: '/' });
+                })
+                .catch(error => {
+                    console.log('LOGOUT Error', error);
+                });
+        }
     },
     computed: {
-        localeName: () => {
-            return 'ahha'
+        localeName() {
+            return 'ahha';
+        },
+        loggedIn() {
+            return null !== this.$store.state.unijobs_magic_token;
         }
     }
 }

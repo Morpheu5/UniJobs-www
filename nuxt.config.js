@@ -32,12 +32,7 @@ module.exports = {
   ],
   modules: [
     [ '@nuxtjs/axios', {
-      baseURL: process.env.API_URL || 'http://localhost:3000',
-      requestInterceptor: (config) => {
-        throw new Error();
-        config.headers.common["Accept"] = "application/json";
-        return config;
-      }
+      baseURL: process.env.API_URL || 'http://localhost:3000'
     }],
     [ '@nuxtjs/markdownit', {
       injected: true,
@@ -64,7 +59,8 @@ module.exports = {
       },
       strategy: 'prefix',
       rootRedirect: 'it'
-    }]
+    }],
+    [ 'cookie-universal-nuxt' ],
   ],
   plugins: [
     '~/plugins/axios.js',

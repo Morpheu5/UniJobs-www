@@ -39,10 +39,10 @@ export default {
             return path ? path.map((e, i, a) => (i < a.length-1 ? e.short_name : e.name)).join(' › ') : '';
         }
     },
-    validate ({ params }) {
+    validate({ params }) {
         return /^\d+$/.test(params.id)
     },
-    async asyncData ({ app, params }) {
+    async asyncData({ app, params }) {
         const jobResponse = await app.$axios.get(`/contents/${params.id}?content_type=job`).catch(e => { console.log(e) })
         return { job: jobResponse.data }
     }

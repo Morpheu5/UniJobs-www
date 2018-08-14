@@ -20,7 +20,7 @@ export default {
   components: {
     JobsList
   },
-  async asyncData ({ app, params }) {
+  async asyncData({ app, params }) {
     const [ jobsResponse ] = await Promise.all([
       app.$axios.get('/contents?content_type=job')
     ])
