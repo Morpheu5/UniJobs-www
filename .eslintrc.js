@@ -1,21 +1,28 @@
 module.exports = {
-  root: true,
+  parserOptions: {
+    parser: 'babel-eslint',
+    ecmaVersion: 2017,
+    sourceType: 'module'
+  },
   env: {
     browser: true,
-    node: true
+    node: true,
+    es6: true
   },
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
+  root: true,
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/essential'
   ],
-  // required to lint *.vue files
   plugins: [
     'vue'
   ],
-  // add your custom rules here
-  rules: {}
+  rules: {
+    'no-console': 'off',
+    'no-debugger': 'off',
+    'no-unused-vars': ['warn', { "argsIgnorePattern": "^_" }],
+    'vue/html-indent': [ 'error', 4 ],
+    // 'vue/script-indent': [ 'error', 4 ],
+    'vue/attributes-order': 'error',
+    'vue/order-in-components': 'error'
+  },
 }
