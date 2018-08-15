@@ -16,11 +16,11 @@
                         <b-dropdown-item v-for="locale in $i18n.locales" :key="locale.code" :href="switchLocalePath(locale.code)">{{ locale.name }}</b-dropdown-item>
                     </b-nav-item-dropdown>
 
-                    <b-nav-item-dropdown right v-if="loggedIn" text="User">
+                    <b-nav-item-dropdown v-if="loggedIn" text="User" right>
                         <b-dropdown-item href="#">Profile</b-dropdown-item>
                         <b-dropdown-item @click="doTheLogout">Logout</b-dropdown-item>
                     </b-nav-item-dropdown>
-                    <b-nav-item :href="localePath('user-login')" right v-else>Login</b-nav-item>
+                    <b-nav-item v-else :href="localePath('user-login')" right>Login</b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
         </b-container>

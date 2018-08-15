@@ -2,25 +2,24 @@
     <div>
         <b-row>
             <b-col cols="4" offset="4">
-                <b-form-input id="emailInput"
-                    type="email"
-                    v-model="email"
-                    required
-                    placeholder="Email address">
-                </b-form-input>
+                <b-input id="emailInput"
+                         v-model="email"
+                         type="email"
+                         required
+                         placeholder="Email address">
+                </b-input>
             </b-col>
         </b-row>
         <b-row class="mt-3">
             <b-col cols="4" offset="4">
-                <b-form-input id="passwordInput"
-                    :type="showPassword ? 'text' : 'password'"
-                    v-model="password"
-                    required
-                    placeholder="Password">
-                </b-form-input>
-            </b-col>
-            <b-col class="form-check" cols="2">
-                <b-checkbox v-model="showPassword" id="showPassword">Show password</b-checkbox>
+                <div class="form-group">
+                    <input id="passwordInput"
+                           :type="showPassword ? 'text' : 'password'"
+                           v-model="password"
+                           class="form-control"
+                           placeholder="Password" />
+                    <span :class="showPassword ? 'eye-on' : 'eye-off'" class="btn-eye" @click="showPassword = !showPassword"></span>
+                </div>
             </b-col>
         </b-row>
         <b-row>
