@@ -3,7 +3,7 @@
         <b-container>
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-            <b-collapse is-nav id="nav_collapse">
+            <b-collapse id="nav_collapse" is-nav>
 
                 <b-navbar-nav>
                     <b-nav-item :href="localePath('index')">Home</b-nav-item>
@@ -34,9 +34,16 @@
 
 <script>
 export default {
+    computed: {
+        localeName() {
+            return 'ahha';
+        },
+        loggedIn() {
+            return null !== this.$store.state.unijobs_magic_token;
+        }
+    },
     methods: {
         doTheLogout() {
-            console.log(this.$store);
             this.$axios
                 .post('/logout',
                     null,
@@ -53,14 +60,6 @@ export default {
                 .catch(error => {
                     console.log('LOGOUT Error', error);
                 });
-        }
-    },
-    computed: {
-        localeName() {
-            return 'ahha';
-        },
-        loggedIn() {
-            return null !== this.$store.state.unijobs_magic_token;
         }
     }
 }

@@ -9,7 +9,6 @@
 
 <script>
 export default {
-    props: ['data', 'locale'],
-    name: 'ContentBlock'
+    props: ['data', 'locale']
 }
 </script>

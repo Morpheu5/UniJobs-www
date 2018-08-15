@@ -4,7 +4,7 @@
             <b-row align-v="center">
                 <b-col>
                     <h1>UniJobs.it</h1>
-                    <p class="headline" v-t="'headline'"></p>
+                    <p v-t="'headline'" class="headline"></p>
                 </b-col>
             </b-row>
         </b-container>

@@ -1,9 +1,9 @@
 <template>
     <div>
-    <ul>
-        <li>Hey</li>
-    </ul>
-    {{ jobs }}
+        <ul>
+            <li>Hey</li>
+        </ul>
+        {{ jobs }}
     </div>
 </template>
 
