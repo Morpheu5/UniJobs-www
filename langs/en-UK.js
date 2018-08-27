@@ -16,6 +16,9 @@ module.exports = {
                 'gross': 'gross',
                 'tax-exempt': 'tax exempt'
             },
+            deadline: 'Deadline',
+            deadline_expired: 'Offer expired',
+            deadline_expired_explanation: 'The deadline to apply for this job has expired. It is sometimes possible that applications are accepted after the deadline, but we recommend to get in touch directly with the institution.',
             application_call_btn: 'Apply here!'
         }
     },
@@ -25,5 +28,6 @@ module.exports = {
     login: 'Login',
     email_address: 'E-mail address',
     password: 'Password',
-    sign_up: 'Sign Up'
+    sign_up: 'Sign Up',
+    warning: 'Warning'
 }

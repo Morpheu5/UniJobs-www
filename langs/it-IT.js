@@ -16,6 +16,9 @@ module.exports = {
                 'gross': 'lordo',
                 'tax-exempt': 'esentasse'
             },
+            deadline: 'Scadenza',
+            deadline_expired: 'Offerta scaduta',
+            deadline_expired_explanation: 'Il termine per presentare domanda è scaduto. In certi casi è possibile che l\'istituto accetti domande fuori scadenza, ma si consiglia di contattare direttamente la segreteria.',
             application_call_btn: 'Fai domanda!'
         }
     },
@@ -25,5 +28,6 @@ module.exports = {
     login: 'Login',
     email_address: 'Indirizzo e-mail',
     password: 'Password',
-    sign_up: 'Registrati'
+    sign_up: 'Registrati',
+    warning: 'Attenzione'
 }
