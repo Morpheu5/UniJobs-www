@@ -43,19 +43,13 @@ module.exports = {
     }],
     [ 'nuxt-i18n', {
       locales: [
-        { code: 'en', iso: 'en-UK', name: 'English' },
-        { code: 'it', iso: 'it-IT', name: 'Italiano' }
+        { code: 'en', iso: 'en-UK', name: 'English', file: 'en-UK.js' },
+        { code: 'it', iso: 'it-IT', name: 'Italiano', file: 'it-IT.js' }
       ],
+      lazy: true,
+      langDir: 'langs/',
       vueI18n: {
-        fallbackLocale: 'it',
-        messages: {
-          it: {
-            headline: 'Lavori accademici in Italia'
-          },
-          en: {
-            headline: 'Academic jobs in Italy'
-          }
-        }
+        fallbackLocale: 'it'
       },
       strategy: 'prefix',
       rootRedirect: 'it'
@@ -66,7 +60,10 @@ module.exports = {
       imports: [
         {
           set: '@fortawesome/free-solid-svg-icons',
-          icons: ['faEye', 'faEyeSlash']
+          icons: [
+            'faEye', 'faEyeSlash',
+            'faUserCircle'
+          ]
         },
       ]
     }],

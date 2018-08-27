@@ -2,7 +2,7 @@
     <b-row>
         <b-col>
             <div>
-                <p>The thing with jobs.</p>
+                <h2>{{ $t('jobs_list.latest_jobs')}}</h2>
                 <ul>
                     <li v-for="job in jobs" :key="job.id">
                         <nuxt-link :to="localePath({ name: 'jobs-id', params: { id: job.id }})">{{ job.title[$i18n.locale] }}</nuxt-link>

@@ -4,20 +4,23 @@
             <b-col cols="4" offset="4">
                 <b-input id="emailInput"
                          v-model="email"
+                         :placeholder="$t('email_address')"
+                         name="email"
                          type="email"
-                         required
-                         placeholder="Email address">
-                </b-input>
+                         autocomplete="username"
+                         required />
             </b-col>
         </b-row>
         <b-row class="mt-3">
             <b-col cols="4" offset="4">
                 <div class="form-group">
                     <input id="passwordInput"
+                           :placeholder="$t('password')"
                            :type="showPassword ? 'text' : 'password'"
                            v-model="password"
-                           class="form-control"
-                           placeholder="Password" />
+                           name="password"
+                           autocomplete="current-password"
+                           class="form-control" />
                     <span :class="showPassword ? 'eye-on' : 'eye-off'" class="btn-eye" @click="showPassword = !showPassword"></span>
                 </div>
             </b-col>
@@ -25,9 +28,9 @@
         <b-row>
             <b-col cols="4" offset="4">
                 <div class="float-right mt-4">
-                    <b-button variant="primary" @click="doTheLogin">Login</b-button>
+                    <b-button variant="primary" @click="doTheLogin">{{ $t('login') }}</b-button>
                     <span class="mx-3"></span>
-                    <b-button variant="secondary">Sign Up</b-button>
+                    <b-button variant="secondary">{{ $t('sign_up') }}</b-button>
                 </div>
             </b-col>
         </b-row>
