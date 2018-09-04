@@ -20,7 +20,7 @@ module.exports = {
     'no-console': 'off',
     'no-debugger': 'off',
     'no-unused-vars': ['warn', { "argsIgnorePattern": "^_" }],
-    'vue/html-indent': [ 'error', 4 ],
+    'vue/html-indent': 'off',
     // 'vue/script-indent': [ 'error', 4 ],
     'vue/attributes-order': 'error',
     'vue/order-in-components': 'error'

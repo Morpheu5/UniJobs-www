@@ -24,10 +24,16 @@ module.exports = {
     },
     user: 'Utente',
     profile: 'Profilo',
+    your_profile: 'Il tuo profilo',
     logout: 'Esci',
     login: 'Login',
     email_address: 'Indirizzo e-mail',
     password: 'Password',
     sign_up: 'Registrati',
-    warning: 'Attenzione'
+    warning: 'Attenzione',
+    email_verification_success: 'La tua e-mail è stata verificata correttamente! Ora puoi fare il log-in',
+    email_verification_failure: 'C\'è stato un errore nella verifica della tua e-mail. Controlla di aver inserito il URL correttamente.',
+    login_failure_message: 'Impossibile effettuare il log-in. Controlla che e-mail e password siano corrette.',
+    signup_success_message: 'Grazie per aver effettuato la registrazione. Riceverai a breve una e-mail con il link di verifica per completare la procedura.',
+    signup_failure_message: 'C\'è stato un problema nel creare il tuo account. Verifica di aver inserito e-mail e password validi.'
 }

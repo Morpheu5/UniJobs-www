@@ -15,6 +15,10 @@ module.exports = {
   loading: { color: '#1E90FF' },
   /* Build configuration */
   build: {
+    vendor: [
+      'jquery/dist/jquery.min.js',
+      'bootstrap-italia/dist/js/bootstrap-italia.bundle.min.js',
+    ],
     /* Run ESLint on save */
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -30,6 +34,9 @@ module.exports = {
   css: [
     '@/assets/_custom_theme.scss'
   ],
+  router: {
+    middleware: ['prepend_locale'],
+  },
   modules: [
     [ '@nuxtjs/axios', {
       baseURL: process.env.API_URL || 'http://localhost:3000'
@@ -52,7 +59,8 @@ module.exports = {
         fallbackLocale: 'it'
       },
       strategy: 'prefix',
-      rootRedirect: 'it'
+      rootRedirect: 'it',
+      defaultLocale: 'it'
     }],
     [ 'cookie-universal-nuxt' ],
     [ 'nuxt-fontawesome', {

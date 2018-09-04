@@ -9,6 +9,7 @@ RUN mkdir -p /app
 ADD .nuxt /app/.nuxt
 ADD static /app/static
 ADD package.json /app
+ADD package-lock.json /app
 WORKDIR /app
 RUN npm install
 

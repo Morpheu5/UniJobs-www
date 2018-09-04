@@ -24,10 +24,16 @@ module.exports = {
     },
     user: 'User',
     profile: 'Profile',
+    your_profile: 'Your profile',
     logout: 'Logout',
     login: 'Login',
     email_address: 'E-mail address',
     password: 'Password',
     sign_up: 'Sign Up',
-    warning: 'Warning'
+    warning: 'Warning',
+    email_verification_success: 'Your e-mail was verified correctly! You can now log in.',
+    email_verification_failure: 'There was an error with your verification e-mail. Please check that you entered the verification URL correctly.',
+    login_failure_message: 'Login failed. Please check that your e-mail address and password are correct.',
+    signup_success_message: 'Thank you for signing up. You will shortly receive an e-mail with a verification link to complete the process.',
+    signup_failure_message: 'There was a problem creating your account. Please check that you have provided valid e-mail and password.'
 }
