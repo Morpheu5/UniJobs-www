@@ -49,4 +49,5 @@ module.exports = {
     signup_success_message: 'Grazie per aver effettuato la registrazione. Riceverai a breve una e-mail con il link di verifica per completare la procedura.',
     signup_failure_message: 'C\'è stato un problema nel creare il tuo account. Verifica di aver inserito e-mail e password validi.',
     required_field: 'Questo campo è obbligatorio.',
+    invalid_email: 'Questo non sembra un indirizzo e-mail valido.',
 }

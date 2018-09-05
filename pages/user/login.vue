@@ -10,61 +10,69 @@
                 </b-alert>
             </b-col>
         </b-row>
-        <b-row>
-            <b-col cols="4" offset="4">
-                <b-input id="emailInput"
-                         v-model="email"
-                         :placeholder="$t('email_address')"
-                         name="email"
-                         type="email"
-                         autocomplete="username"
-                         required
-                         @input="loginFailed = false; signupOutcome = null"
-                />
-            </b-col>
-        </b-row>
-        <b-row class="mt-3">
-            <b-col cols="4" offset="4">
-                <b-form-group>
-                    <b-input id="passwordInput"
-                             v-model="password"
-                             :placeholder="$t('password')"
-                             :type="showPassword ? 'text' : 'password'"
-                             name="password"
-                             autocomplete="current-password"
-                             @input="loginFailed = false; signupOutcome = null"
-                             @keyup.native.enter="doTheLogin"
-                    />
-                    <span :class="showPassword ? 'eye-on' : 'eye-off'" class="btn-eye" style="left: -2.5em" @click="showPassword = !showPassword"></span>
-                </b-form-group>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col cols="4" offset="4">
-                <b-alert :show="loginFailed" variant="warning" class="mt-3">
-                    {{ $t('login_failure_message') }}
-                </b-alert>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col cols="4" offset="4">
-                <b-alert :show="signupOutcome === 'success'" variant="success" class="mt-3">
-                    {{ $t('signup_success_message') }}
-                </b-alert>
-                <b-alert :show="signupOutcome === 'fail'" variant="warning" class="mt-3">
-                    {{ $t('signup_failure_message') }}
-                </b-alert>
+        <b-form id="loginForm" :validated="validated" novalidate @submit="submitForm('login', $event)">
+            <b-row>
+                <b-col cols="4" offset="4">
+                    <b-form-group>
+                        <b-input id="email"
+                                 v-model="email"
+                                 type="email"
+                                 name="email"
+                                 autocomplete="username"
+                                 required
+                        />
+                        <label :class="email !== '' ? 'active' : null" for="email">
+                            {{ $t('email_address') }}
+                        </label>
+                        <b-form-invalid-feedback>{{ $t(emailValidationFeedback) }}</b-form-invalid-feedback>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col cols="4" offset="4">
+                    <b-form-group>
+                        <b-input id="password"
+                                 v-model="password"
+                                 :type="showPassword ? 'text' : 'password'"
+                                 name="password"
+                                 autocomplete="current-password"
+                                 required
+                        />
+                        <span :class="showPassword ? 'eye-on' : 'eye-off'" class="btn-eye" style="left: -2.5em" @click="showPassword = !showPassword"></span>
+                        <label :class="password !== '' ? 'active' : null" for="password">
+                            {{ $t('password') }}
+                        </label>
+                        <b-form-invalid-feedback>{{ $t('required_field') }}</b-form-invalid-feedback>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col cols="4" offset="4">
+                    <b-alert :show="loginFailed" variant="warning" class="mt-3">
+                        {{ $t('login_failure_message') }}
+                    </b-alert>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col cols="4" offset="4">
+                    <b-alert :show="signupOutcome === 'success'" variant="success" class="mt-3">
+                        {{ $t('signup_success_message') }}
+                    </b-alert>
+                    <b-alert :show="signupOutcome === 'fail'" variant="warning" class="mt-3">
+                        {{ $t('signup_failure_message') }}
+                    </b-alert>
 
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col cols="4" offset="4">
-                <div class="float-right mt-4">
-                    <b-button variant="primary" @click="doTheLogin">{{ $t('login') }}</b-button>
-                    <b-button v-show="!emailVerificationStatus" variant="secondary" class="ml-4" @click="doTheSignUp">{{ $t('sign_up') }}</b-button>
-                </div>
-            </b-col>
-        </b-row>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col cols="4" offset="4">
+                    <div class="float-right mt-4">
+                        <b-button variant="primary" type="submit">{{ $t('login') }}</b-button>
+                        <b-button v-show="!emailVerificationStatus" variant="secondary" class="ml-4" @click="submitForm('signup')">{{ $t('sign_up') }}</b-button>
+                    </div>
+                </b-col>
+            </b-row>
+        </b-form>
     </div>
 </template>
 
@@ -79,58 +87,61 @@ export default {
             loginFailed: false,
             signupOutcome: null,
             validated: null,
-            invalidEmail: true,
-            invalidPassword: true
+            emailValidationFeedback: ''
         }
     },
     mounted() {
         this.emailVerificationStatus = null !== (this.$route.query.email_verified || null) ? this.$route.query.email_verified === 'true' : null
     },
     methods: {
-        verifyForm() {
-            this.invalidEmail = this.email === ''
-            this.invalidPassword = this.password === ''
-            this.validated = true
-            return !this.invalidEmail && !this.invalidPassword
-        },
-        doTheLogin() {
+        submitForm(action, e = null) {
+            if (null !== e) {
+                e.preventDefault()
+                e.stopPropagation()
+            }
+
+            this.emailValidationFeedback = ''
+
             this.signupOutcome = null
             this.loginFailed = false
-            if (!this.verifyForm()) {
-                this.loginFailed = true
-                return
-            }
-            this.$axios.post(
-                '/login',
-                { email: this.email, password: this.password }
-            ).then(response => {
-                if (response.data.token) {
-                    this.$store.commit('updateAuthToken', response.data.token);
-                    this.$router.push({ path: this.$route.query.redirect || '/' })
-                } else {
-                    this.loginFailed = true
-                    this.verifyForm()
+
+            const form = document.getElementById('loginForm')
+            const emailInput = document.getElementById('email')
+
+            if (form.checkValidity()) {
+                if (action === 'login') {
+                    this.$axios.post(
+                        '/login',
+                        { email: this.email, password: this.password }
+                    ).then(response => {
+                        if (response.data.token) {
+                            this.$store.commit('updateAuthToken', response.data.token);
+                            this.$router.push({ path: this.$route.query.redirect || '/' })
+                        } else {
+                            this.loginFailed = true
+                        }
+                    }).catch(_error => {
+                        this.loginFailed = true
+                    })
+                } else if (action === 'signup') {
+                    this.$axios.post(
+                        '/users',
+                        { user: { email: this.email, password: this.password } }
+                    ).then(_response => {
+                        this.signupOutcome = 'success'
+                    }).catch(_error => {
+                        this.signupOutcome = 'fail'
+                    })
                 }
-            }).catch(_error => {
+            } else {
+                if (emailInput.validity.typeMismatch) {
+                    this.emailValidationFeedback = 'invalid_email'
+                } else {
+                    this.emailValidationFeedback = 'required_field'
+                }
                 this.loginFailed = true
-                this.verifyForm()
-            })
-        },
-        doTheSignUp() {
-            this.loginFailed = false
-            this.signupOutcome = null
-            if (!this.verifyForm()) {
-                this.signupOutcome = 'fail'
-                return
             }
-            this.$axios.post(
-                '/users',
-                { user: { email: this.email, password: this.password } }
-            ).then(_response => {
-                this.signupOutcome = 'success'
-            }).catch(_error => {
-                this.signupOutcome = 'fail'
-            })
+            this.validated = true
         }
     }
 }

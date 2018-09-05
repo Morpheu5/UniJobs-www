@@ -49,4 +49,5 @@ module.exports = {
     signup_success_message: 'Thank you for signing up. You will shortly receive an e-mail with a verification link to complete the process.',
     signup_failure_message: 'There was a problem creating your account. Please check that you have provided valid e-mail and password.',
     required_field: 'This field is required.',
+    invalid_email: 'That does not seem like a valid e-mail address.',
 }
