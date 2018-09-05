@@ -15,10 +15,6 @@ module.exports = {
   loading: { color: '#1E90FF' },
   /* Build configuration */
   build: {
-    vendor: [
-      'jquery/dist/jquery.min.js',
-      'bootstrap-italia/dist/js/bootstrap-italia.bundle.min.js',
-    ],
     /* Run ESLint on save */
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -70,7 +66,8 @@ module.exports = {
           set: '@fortawesome/free-solid-svg-icons',
           icons: [
             'faEye', 'faEyeSlash',
-            'faUserCircle'
+            'faUserCircle',
+            'faExclamationTriangle'
           ]
         },
       ]

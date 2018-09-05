@@ -14,3 +14,9 @@ $theme-colors: (
 @import "node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss";
 @import "node_modules/bootstrap-italia/src/icons/css/italia-icon-font.css";
 
+.form-group input[required]+label:after { 
+  color: theme-color('danger');
+  content: "*";
+  margin-left: 0.25em;
+}
+
