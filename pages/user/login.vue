@@ -18,10 +18,10 @@
                                  v-model="email"
                                  type="email"
                                  name="email"
-                                 autocomplete="username"
+                                 autocomplete="email"
                                  required
                         />
-                        <label :class="email !== '' ? 'active' : null" for="email">
+                        <label :class="email !== '' ? 'active' : null" name="email" for="email">
                             {{ $t('email_address') }}
                         </label>
                         <b-form-invalid-feedback>{{ $t(emailValidationFeedback) }}</b-form-invalid-feedback>

@@ -98,7 +98,8 @@ export default {
         }
     },
     async asyncData({ app }) {
-        const { data } = await app.$axios.get('/users/whoami')
+        const whoami = await app.$axios.get('/users/whoami')
+        const { data } = await app.$axios.get(`/users/${whoami.data.id}`)
         return {
             user: data
         }
@@ -128,6 +129,8 @@ export default {
         changePassword(e) {
             e.preventDefault()
             e.stopPropagation()
+
+            this.passwordChanged = false
 
             const form = document.getElementById('change_password_form')
             document.getElementById('newPasswordInput').setCustomValidity('')

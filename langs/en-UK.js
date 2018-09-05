@@ -38,7 +38,7 @@ module.exports = {
     save_profile_details_btn: 'Save profile details',
     profile_saved: 'Your profile info were changed successfully!',
     change_password_btn: 'Change password',
-    passwords_match: 'The new passwords cannot be identical to the current one.',
+    passwords_match: 'The new password cannot be identical to the current one.',
     password_changed: 'Your password was changed successfully!',
     email_address: 'E-mail address',
     password: 'Password',
