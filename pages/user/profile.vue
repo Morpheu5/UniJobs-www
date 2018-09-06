@@ -36,6 +36,14 @@
                             </b-form-group>
                         </b-col>
                     </b-row>
+                    <b-row class="mt-3">
+                        <b-col>
+                            <b-form-group>
+                                <b-select id="gender" v-model="user.gender" :options="genders" />
+                                <label :class="user.gender != null ? 'active' : null" for="gender">{{ $t('gender') }}</label>
+                            </b-form-group>
+                        </b-col>
+                    </b-row>
                     <b-row class="mt-3 float-right">
                         <b-button variant="primary" type="submit">{{ $t('save_profile_details_btn') }}</b-button>
                     </b-row>
@@ -123,6 +131,13 @@ export default {
     },
     data() {
         return {
+            genders: [
+                { value: null, text: this.$t('select_gender') },
+                { value: 'male', text: this.$t('male') },
+                { value: 'female', text: this.$t('female') },
+                { value: 'other', text: this.$t('other_gender') },
+                { value: 'unspecified', text: this.$t('unspecified_gender')}
+            ],
             oldPassword: '',
             showOldPassword: false,
             newPassword: '',
@@ -152,7 +167,8 @@ export default {
                 this.$axios.patch(`/users/${this.user.id}`, {
                     user: {
                         given_name: this.user.given_name,
-                        family_name: this.user.family_name
+                        family_name: this.user.family_name,
+                        gender: this.user.gender
                     }
                 }).then(_response => {
                     this.profileSaved = true

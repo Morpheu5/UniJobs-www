@@ -125,7 +125,7 @@ export default {
                     })
                 } else if (action === 'signup') {
                     this.$axios.post(
-                        '/users',
+                        `/users?locale=${this.currentLocale.code}`,
                         { user: { email: this.email, password: this.password } }
                     ).then(_response => {
                         this.signupOutcome = 'success'

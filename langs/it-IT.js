@@ -50,5 +50,13 @@ module.exports = {
     signup_failure_message: 'C\'è stato un problema nel creare il tuo account. Verifica di aver inserito e-mail e password validi.',
     required_field: 'Questo campo è obbligatorio.',
     invalid_email: 'Questo non sembra un indirizzo e-mail valido.',
+    
     your_organizations: 'Organizzazioni',
+
+    gender: 'Genere',
+    select_gender: 'Seleziona un\'opzione',
+    male: 'Uomo',
+    female: 'Donna',
+    other_gender: 'Altro',
+    unspecified_gender: 'Preferisco non dirlo',
 }
