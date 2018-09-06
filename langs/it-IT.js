@@ -1,4 +1,6 @@
 module.exports = {
+    e404_headline: 'Pagina non trovata',
+    e404_message: 'Questa pagina non esiste.',
     headline: 'Lavori accademici in Italia',
     main_menu: {
         about_us: 'Chi siamo'

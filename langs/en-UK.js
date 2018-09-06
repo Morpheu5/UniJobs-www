@@ -1,4 +1,7 @@
 module.exports = {
+    e404_headline: 'Page not found',
+    e404_message: 'This page does not exist.',
+
     headline: 'Academic jobs in Italy',
     main_menu: {
         about_us: 'About Us'

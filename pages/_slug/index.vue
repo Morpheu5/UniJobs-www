@@ -24,8 +24,9 @@ export default {
     components: {
         ContentBlock
     },
-    async asyncData({ app, params }) {
-        const response = await app.$axios.get(`/contents/slug/${params.slug}`).catch(e => { console.log(e) })
+    async asyncData({ app, error, params }) {
+        const response = await app.$axios.get(`/contents/slug/${params.slug}`)
+                                         .catch(_e => error({ statusCode: 404 }))
         return { content: response.data }
     }
 }
