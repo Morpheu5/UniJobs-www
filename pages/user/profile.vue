@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div id="profile" class="mb-5">
         <b-row>
             <b-col cols="7">
                 <h4>{{ $t('your_details_header') }}</h4>
@@ -40,6 +40,17 @@
                         <b-button variant="primary" type="submit">{{ $t('save_profile_details_btn') }}</b-button>
                     </b-row>
                 </b-form>
+                
+                <div class="clearfix"></div><hr class="mt-5" />
+
+                <h4>{{ $t('your_organizations') }}</h4>
+
+                <b-list-group class="organizations mt-4">
+                    <b-list-group-item v-for="organization in user.organizations" :key="organization[organization.length-1].id">
+                        <!-- <fa :icon="['fas', 'times']" size="sm" class="text-danger mr-3" /> -->
+                        <span :inner-html.prop="organization | formatPath" />
+                    </b-list-group-item>
+                </b-list-group>
             </b-col>
             <b-col offset="1">
                 <h4>{{ $t('change_your_password_header') }}</h4>
@@ -81,9 +92,35 @@
     </div>
 </template>
 
+<style lang="scss">
+#profile {
+    .organizations {
+        .list-group-item {
+            &>* {
+                vertical-align: middle;
+            }
+
+            .long_name {
+                font-weight: bold;
+            }
+
+            .short_name:after {
+                content: " › ";
+            }
+        }
+    }
+}
+</style>
+
+
 <script>
 export default {
     middleware: 'authenticated_route',
+    filters: {
+        formatPath(path) {
+            return path ? path.map((e, i, a) => (i < a.length-1 ? `<span class="short_name">${e.short_name}</span>` : `<span class="name long_name">${e.name} (${e.short_name})</span>`)).join('') : '';
+        }
+    },
     data() {
         return {
             oldPassword: '',
@@ -100,8 +137,9 @@ export default {
     async asyncData({ app }) {
         const whoami = await app.$axios.get('/users/whoami')
         const { data } = await app.$axios.get(`/users/${whoami.data.id}`)
+        const organizations = data.organizations.map(o => o.ancestors)
         return {
-            user: data
+            user: { ...data, organizations: organizations }
         }
     },
     methods: {

@@ -16,6 +16,5 @@
 #site_footer {
     border-top: 1px solid #eee;
     color: theme-color('light');
-
 }
 </style>

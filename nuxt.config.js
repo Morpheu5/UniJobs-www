@@ -67,7 +67,8 @@ module.exports = {
           icons: [
             'faEye', 'faEyeSlash',
             'faUserCircle',
-            'faExclamationTriangle'
+            'faExclamationTriangle',
+            'faTimes'
           ]
         },
       ]
