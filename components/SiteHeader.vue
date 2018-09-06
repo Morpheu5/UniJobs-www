@@ -3,8 +3,8 @@
         <b-container>
             <b-row align-v="center">
                 <b-col>
-                    <h1>UniJobs.it</h1>
-                    <p v-t="'headline'" class="headline"></p>
+                    <h1 class="text-white mt-3">UniJobs.it</h1>
+                    <p v-t="'headline'" class="headline text-white"></p>
                 </b-col>
             </b-row>
         </b-container>
