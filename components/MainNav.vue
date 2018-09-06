@@ -17,7 +17,7 @@
                     </b-nav-item-dropdown>
 
                     <b-nav-item-dropdown v-if="loggedIn" :title="$t('user')" no-caret right>
-                        <template slot="text"><fa :icon="['fas', 'user-circle']" size="lg" /></template>
+                        <template slot="text"><fa :icon="['fas', 'smile']" size="lg" /></template>
                         <b-dropdown-item :href="localePath({ name: 'user-profile' })">{{ $t('profile') }}</b-dropdown-item>
                         <b-dropdown-item @click="doTheLogout">{{ $t('logout') }}</b-dropdown-item>
                     </b-nav-item-dropdown>

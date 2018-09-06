@@ -67,10 +67,17 @@ module.exports = {
           icons: [
             'faEye', 'faEyeSlash',
             'faUserCircle',
+            'faSmile',
             'faExclamationTriangle',
             'faTimes'
           ]
         },
+        {
+          set: '@fortawesome/free-regular-svg-icons',
+          icons: [
+            'faSmile'
+          ]
+        }
       ]
     }],
   ],

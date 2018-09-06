@@ -54,7 +54,7 @@ module.exports = {
     your_organizations: 'Organizations',
 
     gender: 'Gender',
-    select_gender: 'Please choose one',
+    select_gender: '— Please choose one —',
     male: 'Male',
     female: 'Female',
     other_gender: 'Other',
