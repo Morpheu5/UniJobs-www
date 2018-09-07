@@ -22,7 +22,7 @@ module.exports = {
     'no-unused-vars': ['warn', { "argsIgnorePattern": "^_" }],
     'vue/html-indent': 'off',
     // 'vue/script-indent': [ 'error', 4 ],
-    'vue/attributes-order': 'error',
+    'vue/attributes-order': 'off',//'error',
     'vue/order-in-components': 'error'
   },
 }
