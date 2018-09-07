@@ -6,7 +6,13 @@ module.exports = {
         about_us: 'Chi siamo'
     },
     jobs_list: {
-        latest_jobs: 'Offerte di lavoro più recenti'
+        latest_jobs: 'Offerte di lavoro più recenti',
+        search_filters: 'Filtri di ricerca',
+        description_h: 'Descrizione',
+        job_title_h: 'Titolo',
+        employer_h: 'Istituto',
+        deadline_h: 'Scadenza',
+        include_expired_h: 'Includi offerte scadute',
     },
     job_page: {
         meta: {

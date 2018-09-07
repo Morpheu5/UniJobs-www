@@ -7,7 +7,13 @@ module.exports = {
         about_us: 'About Us'
     },
     jobs_list: {
-        latest_jobs: 'Latest job offers'
+        latest_jobs: 'Latest job offers',
+        search_filters: 'Search filters',
+        description_h: 'Job Description',
+        job_title_h: 'Job Title',
+        employer_h: 'Employer',
+        deadline_h: 'Deadline',
+        include_expired_h: 'Include expired offers',
     },
     job_page: {
         meta: {
