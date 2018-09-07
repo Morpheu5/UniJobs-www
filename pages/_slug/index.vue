@@ -26,7 +26,10 @@ export default {
     },
     async asyncData({ app, error, params }) {
         const response = await app.$axios.get(`/contents/slug/${params.slug}`)
-                                         .catch(({response}) => error({ statusCode: response.status }))
+                                         .catch(({response}) => error({
+                                             statusCode: response.status,
+                                             params: params,
+                                         }))
         return { content: response.data }
     }
 }
