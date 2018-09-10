@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ContentBlock from '~/components/ContentBlock'
+import ContentBlock from '~/components/ContentBlock';
 
 export default {
     components: {
@@ -29,8 +29,8 @@ export default {
                                          .catch(({response}) => error({
                                              statusCode: response.status,
                                              params: params,
-                                         }))
-        return { content: response.data }
+                                         }));
+        return { content: response.data };
     }
-}
+};
 </script>

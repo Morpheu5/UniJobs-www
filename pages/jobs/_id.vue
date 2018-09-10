@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import ContentBlock from '~/components/ContentBlock'
+import ContentBlock from '~/components/ContentBlock';
 
 export default {
     components: {
@@ -64,11 +64,11 @@ export default {
         }
     },
     validate({ params }) {
-        return /^\d+$/.test(params.id)
+        return /^\d+$/.test(params.id);
     },
     async asyncData({ app, params }) {
-        const jobResponse = await app.$axios.get(`/contents/${params.id}?content_type=job`).catch(e => { console.log(e) })
-        return { job: jobResponse.data }
+        const jobResponse = await app.$axios.get(`/contents/${params.id}?content_type=job`).catch(e => { console.log(e); });
+        return { job: jobResponse.data };
     }
-}
+};
 </script>

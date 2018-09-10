@@ -147,22 +147,22 @@ export default {
             changePasswordFormValidated: false,
             passwordsMatch: false,
             passwordChanged: false
-        }
+        };
     },
     async asyncData({ app }) {
-        const whoami = await app.$axios.get('/users/whoami')
-        const { data } = await app.$axios.get(`/users/${whoami.data.id}`)
-        const organizations = data.organizations.map(o => o.ancestors)
+        const whoami = await app.$axios.get('/users/whoami');
+        const { data } = await app.$axios.get(`/users/${whoami.data.id}`);
+        const organizations = data.organizations.map(o => o.ancestors);
         return {
             user: { ...data, organizations: organizations }
-        }
+        };
     },
     methods: {
         saveProfile(e) {
-            e.preventDefault()
-            e.stopPropagation()
+            e.preventDefault();
+            e.stopPropagation();
 
-            const form = document.getElementById('profile_details_form')
+            const form = document.getElementById('profile_details_form');
             if (form.checkValidity()) {
                 this.$axios.patch(`/users/${this.user.id}`, {
                     user: {
@@ -171,27 +171,27 @@ export default {
                         gender: this.user.gender
                     }
                 }).then(_response => {
-                    this.profileSaved = true
-                    this.profileFormValidated = false
+                    this.profileSaved = true;
+                    this.profileFormValidated = false;
                 }).catch(_error => {
                     // TODO Show some error
-                    console.log(_error)
-                })
+                    console.log(_error);
+                });
             }
-            this.profileFormValidated = true
+            this.profileFormValidated = true;
         },
         changePassword(e) {
-            e.preventDefault()
-            e.stopPropagation()
+            e.preventDefault();
+            e.stopPropagation();
 
-            this.passwordChanged = false
+            this.passwordChanged = false;
 
-            const form = document.getElementById('change_password_form')
-            document.getElementById('newPasswordInput').setCustomValidity('')
+            const form = document.getElementById('change_password_form');
+            document.getElementById('newPasswordInput').setCustomValidity('');
             if (form.checkValidity()) {
                 if (this.oldPassword === this.newPassword) {
-                    this.passwordsMatch = true
-                    document.getElementById('newPasswordInput').setCustomValidity('-')
+                    this.passwordsMatch = true;
+                    document.getElementById('newPasswordInput').setCustomValidity('-');
                 } else {
                     this.$axios.patch(`/users/${this.user.id}`, {
                         user: {
@@ -199,16 +199,16 @@ export default {
                             password: this.newPassword
                         }
                     }).then(_response => {
-                        this.passwordChanged = true
-                        this.changePasswordFormValidated = false
+                        this.passwordChanged = true;
+                        this.changePasswordFormValidated = false;
                     }).catch(_error => {
                         // TODO Show some error
-                        console.log(_error)
-                    })
+                        console.log(_error);
+                    });
                 }
             }
-            this.changePasswordFormValidated = true
+            this.changePasswordFormValidated = true;
         }
     }
-}
+};
 </script>

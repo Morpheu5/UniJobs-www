@@ -26,7 +26,7 @@ const createStore = () => {
                 commit('updateAuthToken', token);
             }
         }
-    })
+    });
 };
 
 export default createStore;

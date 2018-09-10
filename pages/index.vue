@@ -75,7 +75,7 @@
 
 
 <script>
-import JobsList from '~/components/JobsList'
+import JobsList from '~/components/JobsList';
 
 export default {
     components: {
@@ -111,13 +111,13 @@ export default {
                 employer: '',
                 include_expired: false,
             }
-        }
+        };
     },
     async asyncData({ app, _params }) {
         const [ jobsResponse ] = await Promise.all([
             app.$axios.get('/contents?content_type=job')
-        ])
-        return { jobs: jobsResponse.data }
+        ]);
+        return { jobs: jobsResponse.data };
     },
     computed: {
         jobsTable() {
@@ -127,18 +127,18 @@ export default {
                 job_title: job.metadata.job_title[this.$i18n.locale].content,
                 employer: job.organization.ancestors,
                 deadline: job.metadata.deadline,
-            }))
+            }));
         }
     },
     methods: {
-        filterTable(job, index, jobs) {
+        filterTable(job, _index, _jobs) {
             // FIXME The employer part needs tokenization. Perhaps build another function.
             return job.description.includes(this.search_filters.description)
                    && (job.employer.some(e => e.name.toLocaleLowerCase().includes(this.search_filters.employer.toLocaleLowerCase())
                       || e.short_name.toLocaleLowerCase().includes(this.search_filters.employer.toLocaleLowerCase())))
-                   && (new Date(job.deadline) >= new Date() || this.search_filters.include_expired)
+                   && (new Date(job.deadline) >= new Date() || this.search_filters.include_expired);
         }
     }
-}
+};
 </script>
 

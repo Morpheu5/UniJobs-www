@@ -88,25 +88,25 @@ export default {
             signupOutcome: null,
             validated: null,
             emailValidationFeedback: ''
-        }
+        };
     },
     mounted() {
-        this.emailVerificationStatus = null !== (this.$route.query.email_verified || null) ? this.$route.query.email_verified === 'true' : null
+        this.emailVerificationStatus = null !== (this.$route.query.email_verified || null) ? this.$route.query.email_verified === 'true' : null;
     },
     methods: {
         submitForm(action, e = null) {
             if (null !== e) {
-                e.preventDefault()
-                e.stopPropagation()
+                e.preventDefault();
+                e.stopPropagation();
             }
 
-            this.emailValidationFeedback = ''
+            this.emailValidationFeedback = '';
 
-            this.signupOutcome = null
-            this.loginFailed = false
+            this.signupOutcome = null;
+            this.loginFailed = false;
 
-            const form = document.getElementById('loginForm')
-            const emailInput = document.getElementById('email')
+            const form = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
 
             if (form.checkValidity()) {
                 if (action === 'login') {
@@ -116,33 +116,33 @@ export default {
                     ).then(response => {
                         if (response.data.token) {
                             this.$store.commit('updateAuthToken', response.data.token);
-                            this.$router.push({ path: this.$route.query.redirect || '/' })
+                            this.$router.push({ path: this.$route.query.redirect || '/' });
                         } else {
-                            this.loginFailed = true
+                            this.loginFailed = true;
                         }
                     }).catch(_error => {
-                        this.loginFailed = true
-                    })
+                        this.loginFailed = true;
+                    });
                 } else if (action === 'signup') {
                     this.$axios.post(
                         `/users?locale=${this.currentLocale.code}`,
                         { user: { email: this.email, password: this.password } }
                     ).then(_response => {
-                        this.signupOutcome = 'success'
+                        this.signupOutcome = 'success';
                     }).catch(_error => {
-                        this.signupOutcome = 'fail'
-                    })
+                        this.signupOutcome = 'fail';
+                    });
                 }
             } else {
                 if (emailInput.validity.typeMismatch) {
-                    this.emailValidationFeedback = 'invalid_email'
+                    this.emailValidationFeedback = 'invalid_email';
                 } else {
-                    this.emailValidationFeedback = 'required_field'
+                    this.emailValidationFeedback = 'required_field';
                 }
-                this.loginFailed = true
+                this.loginFailed = true;
             }
-            this.validated = true
+            this.validated = true;
         }
     }
-}
+};
 </script>

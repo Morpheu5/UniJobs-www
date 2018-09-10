@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import SiteHeader from '~/components/SiteHeader'
-import MainNav from '~/components/MainNav'
-import SiteFooter from '~/components/SiteFooter'
+import SiteHeader from '~/components/SiteHeader';
+import MainNav from '~/components/MainNav';
+import SiteFooter from '~/components/SiteFooter';
 
 export default {
     components: {
@@ -22,7 +22,7 @@ export default {
         MainNav,
         SiteFooter
     }
-}
+};
 </script>
 
 <style lang="scss">

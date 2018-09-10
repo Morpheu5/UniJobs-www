@@ -23,6 +23,7 @@ module.exports = {
     'vue/html-indent': 'off',
     // 'vue/script-indent': [ 'error', 4 ],
     'vue/attributes-order': 'off',//'error',
-    'vue/order-in-components': 'error'
+    'vue/order-in-components': 'error',
+    'semi': ['error', 'always'],
   },
 }

@@ -67,4 +67,4 @@ module.exports = {
     female: 'Donna',
     other_gender: 'Altro',
     unspecified_gender: 'Preferisco non dirlo',
-}
+};

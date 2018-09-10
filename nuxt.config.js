@@ -23,7 +23,7 @@ module.exports = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     }
   },
@@ -85,4 +85,4 @@ module.exports = {
     '~/plugins/axios.js',
     '~/plugins/utils.js'
   ]
-}
+};
