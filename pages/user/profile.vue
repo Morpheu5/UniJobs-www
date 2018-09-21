@@ -150,8 +150,8 @@ export default {
         };
     },
     async asyncData({ app }) {
-        const whoami = await app.$axios.get('/users/whoami');
-        const { data } = await app.$axios.get(`/users/${whoami.data.id}`);
+        const whoami = await app.$axios.get('/api/users/whoami');
+        const { data } = await app.$axios.get(`/api/users/${whoami.data.id}`);
         const organizations = data.organizations.map(o => o.ancestors);
         return {
             user: { ...data, organizations: organizations }
@@ -164,7 +164,7 @@ export default {
 
             const form = document.getElementById('profile_details_form');
             if (form.checkValidity()) {
-                this.$axios.patch(`/users/${this.user.id}`, {
+                this.$axios.patch(`/api/users/${this.user.id}`, {
                     user: {
                         given_name: this.user.given_name,
                         family_name: this.user.family_name,
@@ -193,7 +193,7 @@ export default {
                     this.passwordsMatch = true;
                     document.getElementById('newPasswordInput').setCustomValidity('-');
                 } else {
-                    this.$axios.patch(`/users/${this.user.id}`, {
+                    this.$axios.patch(`/api/users/${this.user.id}`, {
                         user: {
                             old_password: this.oldPassword,
                             password: this.newPassword

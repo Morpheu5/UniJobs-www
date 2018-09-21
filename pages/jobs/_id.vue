@@ -67,7 +67,7 @@ export default {
         return /^\d+$/.test(params.id);
     },
     async asyncData({ app, params }) {
-        const jobResponse = await app.$axios.get(`/contents/${params.id}?content_type=job`).catch(e => { console.log(e); });
+        const jobResponse = await app.$axios.get(`/api/contents/${params.id}?content_type=job`).catch(e => { console.log(e); });
         return { job: jobResponse.data };
     }
 };

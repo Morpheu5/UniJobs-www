@@ -10,7 +10,7 @@ export default {
         if (route.query.token) {
             // Verify that the token exists and redirect to successful login
             await Promise.all([
-                app.$axios.post('/users/verify_email', { token: route.query.token })
+                app.$axios.post('/api/users/verify_email', { token: route.query.token })
                 .then(_response => {
                     return redirect(303, '/user/login', { email_verified: 'true', redirect: '/user/profile' });
                 })

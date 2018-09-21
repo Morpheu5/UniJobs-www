@@ -115,7 +115,7 @@ export default {
     },
     async asyncData({ app, _params }) {
         const [ jobsResponse ] = await Promise.all([
-            app.$axios.get('/contents?content_type=job')
+            app.$axios.get('/api/contents?content_type=job')
         ]);
         return { jobs: jobsResponse.data };
     },

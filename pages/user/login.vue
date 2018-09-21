@@ -111,7 +111,7 @@ export default {
             if (form.checkValidity()) {
                 if (action === 'login') {
                     this.$axios.post(
-                        '/login',
+                        '/api/login',
                         { email: this.email, password: this.password }
                     ).then(response => {
                         if (response.data.token) {
@@ -125,7 +125,7 @@ export default {
                     });
                 } else if (action === 'signup') {
                     this.$axios.post(
-                        `/users?locale=${this.currentLocale.code}`,
+                        `/api/users?locale=${this.currentLocale.code}`,
                         { user: { email: this.email, password: this.password } }
                     ).then(_response => {
                         this.signupOutcome = 'success';

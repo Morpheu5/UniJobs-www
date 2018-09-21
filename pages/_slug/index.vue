@@ -25,7 +25,7 @@ export default {
         ContentBlock
     },
     async asyncData({ app, error, params }) {
-        const response = await app.$axios.get(`/contents/slug/${params.slug}`)
+        const response = await app.$axios.get(`/api/contents/slug/${params.slug}`)
                                          .catch(({response}) => error({
                                              statusCode: response.status,
                                              params: params,
