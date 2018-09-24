@@ -31,11 +31,28 @@ module.exports = {
     '@/assets/_custom_theme.scss'
   ],
   router: {
-    middleware: ['prepend_locale'],
+    middleware: [
+      'prepend_locale',
+    ],
   },
   modules: [
     [ '@nuxtjs/axios', {
       baseURL: process.env.API_URL || 'http://localhost:3000'
+    }],
+    [ '@nuxtjs/google-analytics', {
+      id: 'UA-126329174-1',
+      // disabled: function() {
+      //   const cookieparser = require('cookieparser');
+      //   const cookies = cookieparser.parse(document.cookie);
+      //   if (cookies.analytics_optin) {
+      //     return false;
+      //   } else {
+      //     return true; // disable unless user has opted in
+      //   }
+      // },
+      debug: {
+        sendHitTask: process.env.NODE_ENV === 'production',
+      }
     }],
     [ '@nuxtjs/markdownit', {
       injected: true,
@@ -46,7 +63,7 @@ module.exports = {
     }],
     [ 'nuxt-i18n', {
       locales: [
-        { code: 'en', iso: 'en-UK', name: 'English', file: 'en-UK.js' },
+        { code: 'en', iso: 'en-GB', name: 'English', file: 'en-GB.js' },
         { code: 'it', iso: 'it-IT', name: 'Italiano', file: 'it-IT.js' }
       ],
       lazy: true,
@@ -82,7 +99,8 @@ module.exports = {
     }],
   ],
   plugins: [
+    // { src: '~/plugins/toggle_analytics.js', ssr: false },
     '~/plugins/axios.js',
-    '~/plugins/utils.js'
+    '~/plugins/utils.js',
   ]
 };

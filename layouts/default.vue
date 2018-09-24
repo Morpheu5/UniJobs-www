@@ -1,5 +1,6 @@
 <template>
     <div class="default layout">
+        <CookieBanner/>
         <SiteHeader/>
         <MainNav/>
         <div class="page-sheet py-5">
@@ -12,12 +13,14 @@
 </template>
 
 <script>
+import CookieBanner from '~/components/CookieBanner';
 import SiteHeader from '~/components/SiteHeader';
 import MainNav from '~/components/MainNav';
 import SiteFooter from '~/components/SiteFooter';
 
 export default {
     components: {
+        CookieBanner,
         SiteHeader,
         MainNav,
         SiteFooter

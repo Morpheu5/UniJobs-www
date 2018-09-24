@@ -2,11 +2,33 @@ module.exports = {
     e404_headline: 'Pagina non trovata',
     e404_message: 'Questa pagina non esiste.',
     headline: 'Lavori accademici in Italia',
+    cookie_banner: {
+        message: `Questo sito utilizza cookie tecnici, analytics e di terze parti.<br />
+                  Proseguendo nella navigazione accetti l’utilizzo dei cookie.`,
+        accept: 'Accetto',
+        privacy: 'Privacy policy',
+    },
     main_menu: {
+        jobs: 'Offerte di lavoro',
         about_us: 'Chi siamo'
+    },
+    footer: {
+        privacy: 'Privacy policy',
+        contact: 'Contattaci',
+    },
+    contact_page: {
+        title: 'Contattaci',
+        message: `
+            <p>Vogliamo sapere cosa pensi!</p>
+            <p>Non siamo ancora prontissimi col reparto comunicazioni, ma nel frattemo puoi mandare una e-mail ad
+                <a href="mailto:andrea.franceschini@gmail.com">andrea.franceschini@gmail.com</a>.
+            </p>
+        `,
     },
     jobs_list: {
         latest_jobs: 'Offerte di lavoro più recenti',
+        no_jobs_h: 'Non ci sono offerte disponibili',
+        no_jobs_message: `I nostri fedeli scoiattoli stanno correndo in giro in cerca di nuove offerte di lavoro da mostrarti. Tieni duro!`,
         search_filters: 'Filtri di ricerca',
         description_h: 'Descrizione',
         job_title_h: 'Titolo',

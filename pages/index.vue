@@ -8,7 +8,7 @@
                     </b-col>
                 </b-row>
 
-                <b-row>
+                <!-- <b-row>
                     <b-col>
                         <b-form-group>
                             <b-input id="filter_description" v-model="search_filters.description" />
@@ -33,14 +33,18 @@
                             </label>
                         </div>
                     </b-col>
-                </b-row>
+                </b-row> -->
 
                 <b-row class="mt-5">
-                    <b-col>
+                    <b-col v-if="jobsTable.length > 0">
                         <b-table id="jobs_list_table" :items="jobsTable" :fields="fields" :filter="filterTable" sort-by="deadline" sort-desc>
                             <span slot="employer" slot-scope="data" v-html="data.value" />
                             <nuxt-link slot="description" slot-scope="data" :to="localePath({ name: 'jobs-id', params: { id: data.item.id }})">{{ data.value }}</nuxt-link>
                         </b-table>
+                    </b-col>
+                    <b-col cols="8" offset="2" v-else>
+                        <h2>{{ $t('jobs_list.no_jobs_h') }}</h2>
+                        <p>{{ $t('jobs_list.no_jobs_message') }}</p>
                     </b-col>
                 </b-row>
             </b-col>

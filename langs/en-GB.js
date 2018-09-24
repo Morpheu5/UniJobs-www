@@ -1,13 +1,34 @@
 module.exports = {
     e404_headline: 'Page not found',
     e404_message: 'This page does not exist.',
-
     headline: 'Academic jobs in Italy',
+    cookie_banner: {
+        message: `This web site uses technical and analytical cookies, both from us and from third parties.<br />
+                  By continuing to use the site, you accept our use of cookies.`,
+        accept: 'Accept',
+        privacy: 'Privacy policy',
+    },
     main_menu: {
+        jobs: 'Job offers',
         about_us: 'About Us'
+    },
+    footer: {
+        privacy: 'Privacy Policy',
+        contact: 'Contact Us'
+    },
+    contact_page: {
+        title: 'Contact Us',
+        message: `
+            <p>We'd love to hear from you!</p>
+            <p>Although our comms are not yet fully set up, you can reach out via e-mail at
+                <a href="mailto:andrea.franceschini@gmail.com">andrea.franceschini@gmail.com</a>.
+            </p>
+        `,
     },
     jobs_list: {
         latest_jobs: 'Latest job offers',
+        no_jobs_h: 'No job offers available',
+        no_jobs_message: `Our dedicated squirrels are running around seeking more jobs to show you. Hang tight!`,
         search_filters: 'Search filters',
         description_h: 'Job Description',
         job_title_h: 'Job Title',
