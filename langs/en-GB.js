@@ -52,6 +52,7 @@ module.exports = {
             application_call_btn: 'Apply here!'
         }
     },
+    read_more: 'Read more',
     user: 'User',
     profile: 'Profile',
     logout: 'Logout',

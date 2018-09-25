@@ -52,6 +52,7 @@ module.exports = {
             application_call_btn: 'Fai domanda!'
         }
     },
+    read_more: 'Continua a leggere',
     user: 'Utente',
     profile: 'Profilo',
     logout: 'Esci',

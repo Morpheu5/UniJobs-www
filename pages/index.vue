@@ -43,10 +43,34 @@
                         </b-table>
                     </b-col>
                     <b-col cols="8" offset="2" v-else>
-                        <h2>{{ $t('jobs_list.no_jobs_h') }}</h2>
+                        <h3>{{ $t('jobs_list.no_jobs_h') }}</h3>
                         <p>{{ $t('jobs_list.no_jobs_message') }}</p>
                     </b-col>
                 </b-row>
+            </b-col>
+        </b-row>
+        <b-row class="mt-5">
+            <b-col cols="4" offset="2">
+                <b-card border-variant="light">
+                    <template v-if="currentLocale.iso == 'en-GB'">
+                        Finding a job in the Italian academia can be hard. Searching for it should not be a nightmare too!
+                    </template>
+                    <template v-if="currentLocale.iso == 'it-IT'">
+                        Trovare un lavoro nell'accademia italiana può essere difficile. Cercarlo non dovrebbe essere un incubo, però!
+                    </template>
+                    <b-btn :href="localePath({ name: 'slug', params: { slug: 'about'} })" variant="primary" class="mt-4">{{ $t('main_menu.about_us') }} ›</b-btn>
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card border-variant="light">
+                    <template v-if="currentLocale.iso == 'en-GB'">
+                        We'd love to hear from you! Please get in touch if you want to share your ideas, help us out, or just say hi!
+                    </template>
+                    <template v-if="currentLocale.iso == 'it-IT'">
+                        Vogliamo sapere cosa pensi! Contattaci se vuoi condividere un'idea, aiutarci, o anche solo per un saluto!
+                    </template>
+                    <b-btn :href="localePath('contact')" variant="primary" class="mt-4">{{ $t('contact_page.title') }} ›</b-btn>
+                </b-card>
             </b-col>
         </b-row>
     </div>
@@ -72,6 +96,13 @@
             .short_name:after {
                 content: " › ";
             }
+        }
+    }
+
+    .card {
+        img {
+            background-color: red;
+            background-blend-mode: multiply;
         }
     }
 }

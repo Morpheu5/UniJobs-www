@@ -69,6 +69,7 @@
                     <div class="float-right mt-4">
                         <b-button variant="primary" type="submit">{{ $t('login') }}</b-button>
                         <b-button v-show="!emailVerificationStatus" variant="secondary" class="ml-4" @click="submitForm('signup')">{{ $t('sign_up') }}</b-button>
+                        <b-input v-model="full_name" class="checker" placeholder="Full name (no)" />
                     </div>
                 </b-col>
             </b-row>
@@ -76,12 +77,20 @@
     </div>
 </template>
 
+<style lang="scss">
+.checker {
+    visibility: hidden;
+}
+</style>
+
+
 <script>
 export default {
     data() {
         return {
             email: '',
             password: '',
+            full_name: '',
             showPassword: false,
             emailVerificationStatus: null,
             loginFailed: false,
@@ -98,6 +107,10 @@ export default {
             if (null !== e) {
                 e.preventDefault();
                 e.stopPropagation();
+            }
+
+            if (this.full_name !== '') {
+                return;
             }
 
             this.emailValidationFeedback = '';
