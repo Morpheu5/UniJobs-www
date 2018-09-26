@@ -86,7 +86,9 @@ module.exports = {
             'faUserCircle',
             'faSmile',
             'faExclamationTriangle',
-            'faTimes'
+            'faTimes',
+            'faArrowRight',
+            'faArrowCircleRight'
           ]
         },
         {

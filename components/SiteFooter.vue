@@ -4,10 +4,18 @@
             <b-row>
                 <b-col class="link-list-wrapper">
                     <ul class="link-list">
-                        <li><a :href="localePath({ name: 'slug', params: { slug: 'about'} })" class="text-white">{{ $t('main_menu.about_us') }}</a></li>
                         <li><a :href="localePath({ name: 'slug', params: { slug: 'privacy'} })" class="text-white">{{ $t('footer.privacy') }}</a></li>
-                        <li><a :href="localePath({ name: 'slug', params: { slug: 'contact'} })" class="text-white">{{ $t('footer.contact') }}</a></li>
+                        <li><a :href="localePath({ name: 'slug', params: { slug: 'cookies'} })" class="text-white">{{ $t('footer.cookies') }}</a></li>
                     </ul>
+                </b-col>
+                <b-col class="link-list-wrapper">
+                    <ul class="link-list">
+                        <li><a :href="localePath({ name: 'slug', params: { slug: 'contact'} })" class="text-white">{{ $t('footer.contact') }}</a></li>
+                        <li><a :href="localePath({ name: 'slug', params: { slug: 'help-us'} })" class="text-white">{{ $t('footer.help_us') }}</a></li>
+                    </ul>
+                </b-col>
+                <b-col>
+                    <p><small v-html="$t('footer.content_license')" /></p>
                 </b-col>
             </b-row>
         </b-container>

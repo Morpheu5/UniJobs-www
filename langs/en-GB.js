@@ -14,7 +14,10 @@ module.exports = {
     },
     footer: {
         privacy: 'Privacy Policy',
-        contact: 'Contact Us'
+        cookies: 'Cookies',
+        contact: 'Contact Us',
+        help_us: 'Help Us',
+        content_license: 'All the content on this site, job offers excluded, are published under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons</a> license.',
     },
     contact_page: {
         title: 'Contact Us',

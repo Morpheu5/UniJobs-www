@@ -43,7 +43,7 @@
                         </b-table>
                     </b-col>
                     <b-col cols="8" offset="2" v-else>
-                        <h3>{{ $t('jobs_list.no_jobs_h') }}</h3>
+                        <h3>{{ $t('jobs_list.no_jobs_h') }} <a :href="localePath({ name: 'slug', params: { slug: 'help-us'} })"><fa :icon="['fas', 'arrow-circle-right']" class="ml-2 mr-3 small mb-1" />{{ $t('footer.help_us') }}!</a></h3>
                         <p>{{ $t('jobs_list.no_jobs_message') }}</p>
                     </b-col>
                 </b-row>

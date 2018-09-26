@@ -3,8 +3,8 @@
         <b-container class="p-4">
             <p v-html="$t('cookie_banner.message')" />
             <p>
-                <b-btn class="mr-2" variant="info" @click="acceptCookies">{{ $t('cookie_banner.accept') }}</b-btn>
-                <b-btn to="/privacy" variant="outline-info">{{ $t('cookie_banner.privacy') }}</b-btn>
+                <b-btn class="mr-2" variant="primary" @click="acceptCookies">{{ $t('cookie_banner.accept') }}</b-btn>
+                <b-btn :href="localePath({ name: 'slug', params: { slug: 'privacy' }})" variant="link">{{ $t('cookie_banner.privacy') }}</b-btn>
             </p>
         </b-container>
     </aside>
