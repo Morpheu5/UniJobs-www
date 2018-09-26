@@ -1,22 +1,25 @@
 # [UniJobs.it](http://www.unijobs.it) web front-end
 
-Finding a job in the Italian academia is already a nightmare. Searching for it should not.
+A Nuxt.js web front-end to support UniJobs.it.
 
-## Build Setup
+## Setup
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
-
-# serve with hot reload at localhost:8080
+```
+$ npm install
 $ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
 ```
 
-Built with Nuxt.js ([docs](https://github.com/nuxt/nuxt.js)).
+The web front-end expects an API running on `localhost:3000`. You can configure this with the `API_URL` environment variable.
+
+## Contributions
+
+We welcome code contributions, bug reports, and feature requests.
+
+Pull requests are particularly welcome but make sure you discuss your contribution with the team first, or you pull request may end up being indefinitely delayed.
+
+1. File an issue and discuss it with the team
+2. Fork the repository
+3. Make, test, and commit your changes to the forked repository
+4. Open a pull request
+
+## [Code of conduct](CODE_OF_CONDUCT.md)
