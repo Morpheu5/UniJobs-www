@@ -41,18 +41,16 @@ module.exports = {
     }],
     [ '@nuxtjs/google-analytics', {
       id: 'UA-126329174-1',
-      // disabled: function() {
-      //   const cookieparser = require('cookieparser');
-      //   const cookies = cookieparser.parse(document.cookie);
-      //   if (cookies.analytics_optin) {
-      //     return false;
-      //   } else {
-      //     return true; // disable unless user has opted in
-      //   }
-      // },
-      debug: {
-        sendHitTask: process.env.NODE_ENV === 'production',
-      }
+      disabled: function() {
+        // const cookieparser = require('cookieparser');
+        // const cookies = cookieparser.parse(document.cookie);
+        // if (cookies.analytics_optin) {
+        //   return false;
+        // } else {
+        //   return true; // disable unless user has opted in
+        // }
+        return process.env.NODE_ENV !== 'production';
+      },
     }],
     [ '@nuxtjs/markdownit', {
       injected: true,

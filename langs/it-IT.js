@@ -31,7 +31,7 @@ module.exports = {
     jobs_list: {
         latest_jobs: 'Offerte di lavoro più recenti',
         no_jobs_h: 'Non ci sono offerte disponibili',
-        no_jobs_message: `I nostri fedeli scoiattoli stanno correndo in giro in cerca di nuove offerte di lavoro da mostrarti. Tieni duro!`,
+        no_jobs_message: `I nostri fidi scoiattoli stanno correndo in cerca di nuove offerte di lavoro da mostrarti. Tieni duro!`,
         search_filters: 'Filtri di ricerca',
         description_h: 'Descrizione',
         job_title_h: 'Titolo',

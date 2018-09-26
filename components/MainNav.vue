@@ -41,7 +41,7 @@ export default {
     methods: {
         doTheLogout() {
             this.$axios
-                .post('/logout',
+                .post('/api/logout',
                     null,
                     {
                         headers: {
