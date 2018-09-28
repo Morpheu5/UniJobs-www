@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-row v-if="null !== emailVerificationStatus" class="mb-3">
-            <b-col cols="4" offset="4">
+            <b-col lg="4" offset-lg="4">
                 <b-alert :show="emailVerificationStatus" variant="success">
                     {{ $t('email_verification_success') }}
                 </b-alert>
@@ -12,7 +12,7 @@
         </b-row>
         <b-form id="loginForm" :validated="validated" novalidate @submit="submitForm('login', $event)">
             <b-row>
-                <b-col cols="4" offset="4">
+                <b-col lg="4" offset="2" offset-lg="4">
                     <b-form-group>
                         <b-input id="email"
                                  v-model="email"
@@ -29,7 +29,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col cols="4" offset="4">
+                <b-col lg="4" offset="2" offset-lg="4">
                     <b-form-group>
                         <b-input id="password"
                                  v-model="password"
@@ -47,14 +47,14 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col cols="4" offset="4">
+                <b-col lg="4" offset-lg="4">
                     <b-alert :show="loginFailed" variant="warning" class="mt-3">
                         {{ $t('login_failure_message') }}
                     </b-alert>
                 </b-col>
             </b-row>
             <b-row>
-                <b-col cols="4" offset="4">
+                <b-col lg="4" offset-lg="4">
                     <b-alert :show="signupOutcome === 'success'" variant="success" class="mt-3">
                         {{ $t('signup_success_message') }}
                     </b-alert>
@@ -65,7 +65,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col cols="4" offset="4">
+                <b-col lg="4" offset-lg="4">
                     <div class="float-right mt-4">
                         <b-button variant="primary" type="submit">{{ $t('login') }}</b-button>
                         <b-button v-show="!emailVerificationStatus" variant="secondary" class="ml-4" @click="submitForm('signup')">{{ $t('sign_up') }}</b-button>

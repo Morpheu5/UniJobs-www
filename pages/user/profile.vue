@@ -1,7 +1,7 @@
 <template>
     <div id="profile" class="mb-5">
         <b-row>
-            <b-col cols="7">
+            <b-col lg="7">
                 <h4>{{ $t('your_details_header') }}</h4>
                 <b-form id="profile_details_form" :validated="profileFormValidated" novalidate @submit="saveProfile">
                     <b-alert :show="profileSaved" dismissible variant="success" @dismissed="profileSaved = false">{{ $t('profile_saved') }}</b-alert>
@@ -60,7 +60,7 @@
                     </b-list-group-item>
                 </b-list-group>
             </b-col>
-            <b-col offset="1">
+            <b-col offset="1" class="mt-5 mt-lg-0">
                 <h4>{{ $t('change_your_password_header') }}</h4>
                 <b-form id="change_password_form" :validated="changePasswordFormValidated" novalidate @submit="changePassword">
                     <b-alert :show="passwordChanged" dismissible variant="success" @dismissed="passwordChanged = false">{{ $t('password_changed') }}</b-alert>

@@ -1,5 +1,5 @@
 <template>
-    <div>{{ currentLocale }}</div>
+    <div />
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template lang="html">
     <b-navbar class="main-navbar" toggleable="sm" type="dark" variant="secondary">
         <b-container>
-            <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+            <b-navbar-toggle target="nav_collapse" class="ml-0 pl-0"></b-navbar-toggle>
 
             <b-collapse id="nav_collapse" is-nav>
 

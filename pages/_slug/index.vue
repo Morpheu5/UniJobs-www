@@ -1,6 +1,6 @@
 <template>
     <b-row>
-        <b-col cols="8" offset="2">
+        <b-col lg="8" offset-lg="2">
             <div>
                 <h2 class="mb-5">{{ content.title[currentLocale.code] }}</h2>
                 <section class="content-description">

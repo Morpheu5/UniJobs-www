@@ -18,7 +18,7 @@
                 </section>
             </div>
         </b-col>
-        <b-col cols="4">
+        <b-col lg="4">
             <h4 class="mb-3">{{ $t('job_page.meta.at_a_glance') }}</h4>
             <p v-if="job.metadata.job_title">{{ $t('job_page.meta.job_title') }}: <strong>{{ job.metadata.job_title[currentLocale.code].content }}</strong></p>
             <p>{{ $t('job_page.meta.institution') }}: <strong>{{ job.organization.ancestors.slice(1) | formatPath }}</strong></p>

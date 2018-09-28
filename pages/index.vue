@@ -2,47 +2,14 @@
     <div id="jobs_list" class="mb-5">
         <b-row>
             <b-col>
-                <b-row>
-                    <b-col>
-                        <!-- <h2>{{ $t('jobs_list.latest_jobs')}}</h2> -->
-                    </b-col>
-                </b-row>
-
-                <!-- <b-row>
-                    <b-col>
-                        <b-form-group>
-                            <b-input id="filter_description" v-model="search_filters.description" />
-                            <label :class="search_filters.description != '' ? 'active' : null" for="filter_description">
-                                {{ $t('jobs_list.description_h') }}
-                            </label>
-                        </b-form-group>
-                    </b-col>
-                    <b-col>
-                        <b-form-group>
-                            <b-input id="filter_employer" v-model="search_filters.employer" />
-                            <label :class="search_filters.employer != '' ? 'active' : null" for="filter_employer">
-                                {{ $t('jobs_list.employer_h') }}
-                            </label>
-                        </b-form-group>
-                    </b-col>
-                    <b-col cols="3" class="mt-2">
-                        <div class="form-check mt-4">
-                            <input id="filter_include_expired" v-model="search_filters.include_expired" type="checkbox" />
-                            <label for="filter_include_expired">
-                                {{ $t('jobs_list.include_expired_h') }}
-                            </label>
-                        </div>
-                    </b-col>
-                </b-row> -->
-
-                <b-row class="mt-5">
+                <b-row class="mt-0 mt-lg-3">
                     <b-col v-if="jobsTable.length > 0">
                         <b-table id="jobs_list_table" :items="jobsTable" :fields="fields" :filter="filterTable" sort-by="deadline" sort-desc>
                             <span slot="employer" slot-scope="data" v-html="data.value" />
                             <nuxt-link slot="description" slot-scope="data" :to="localePath({ name: 'jobs-id', params: { id: data.item.id }})">{{ data.value }}</nuxt-link>
                         </b-table>
                     </b-col>
-                    <b-col cols="8" offset="2" v-else>
+                    <b-col lg="8" offset-lg="2" v-else>
                         <h3>{{ $t('jobs_list.no_jobs_h') }} 😱 <a :href="localePath({ name: 'slug', params: { slug: 'help-us'} })"><fa :icon="['fas', 'arrow-circle-right']" class="ml-2 mr-3 small mb-1" />{{ $t('footer.help_us') }}!</a></h3>
                         <p>{{ $t('jobs_list.no_jobs_message') }}</p>
                     </b-col>
@@ -50,8 +17,8 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col cols="4" offset="2">
-                <b-card border-variant="light">
+            <b-col md="6" offset-md="0" lg="4" offset-lg="2">
+                <b-card class="mt-5 mt-lg-5">
                     <p v-if="currentLocale.iso == 'en-GB'">
                         Finding a job in the Italian academia can be hard. Searching for it should not be a nightmare too!
                     </p>
@@ -61,8 +28,8 @@
                     <b-btn :href="localePath({ name: 'slug', params: { slug: 'about'} })" variant="primary" class="mt-4">{{ $t('main_menu.about_us') }} ›</b-btn>
                 </b-card>
             </b-col>
-            <b-col cols="4">
-                <b-card border-variant="light">
+            <b-col md="6" lg="4">
+                <b-card class="mt-5 mt-lg-5">
                     <p v-if="currentLocale.iso == 'en-GB'">
                         We'd love to hear from you! Please get in touch if you want to share your ideas, help us out, or just say hi!
                     </p>
