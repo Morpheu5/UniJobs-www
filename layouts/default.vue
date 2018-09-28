@@ -24,7 +24,7 @@ export default {
         SiteHeader,
         MainNav,
         SiteFooter
-    }
+    },
 };
 </script>
 

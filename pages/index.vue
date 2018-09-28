@@ -110,12 +110,7 @@
 
 
 <script>
-import JobsList from '~/components/JobsList';
-
 export default {
-    components: {
-        JobsList
-    },
     filters: {
         formatPath(path) {
             return path ? path.map((e, i, a) => (i < a.length-1 ? `<span class="short_name">${e.short_name}</span>` : `<span class="name long_name">${e.name} (${e.short_name})</span>`)).join('') : '';

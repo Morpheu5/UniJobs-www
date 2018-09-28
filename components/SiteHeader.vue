@@ -1,5 +1,8 @@
 <template>
     <header id="site-header" class="bg-primary text-light">
+        <div id="verenv" v-if="$store.state.www_environment !== 'production'" class="float-right mr-2 mt-1 text-right">
+            <p class="small"><strong>{{ $store.state.www_version }} &nbsp; {{ $store.state.www_environment }}</strong></p>
+        </div>
         <b-container>
             <b-row align-v="center">
                 <b-col>
@@ -10,13 +13,3 @@
         </b-container>
     </header>
 </template>
-
-<script>
-export default {
-
-};
-</script>
-
-<style lang="scss" scoped>
-
-</style>

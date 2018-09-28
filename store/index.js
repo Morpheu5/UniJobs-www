@@ -4,7 +4,9 @@ import cookieparser from 'cookieparser';
 const createStore = () => {
     return new Vuex.Store({
         state: {
-            unijobs_magic_token: null
+            unijobs_magic_token: null,
+            www_environment: null,
+            www_version: null,
         },
         mutations: {
             updateAuthToken(state, token = null) {
@@ -14,6 +16,12 @@ const createStore = () => {
                 } else {
                     this.$cookies.remove('unijobs_magic_token');
                 }
+            },
+            www_environment(state, env = null) {
+                state.www_environment = env;
+            },
+            www_version(state, ver = null) {
+                state.www_version = ver;
             }
         },
         actions: {
@@ -24,6 +32,8 @@ const createStore = () => {
                     token = parsed.unijobs_magic_token;
                 }
                 commit('updateAuthToken', token);
+                commit('www_environment', process.env.NODE_ENV);
+                commit('www_version', process.env.npm_package_version);
             }
         }
     });
