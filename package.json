@@ -1,6 +1,6 @@
 {
   "name": "www",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "UniJobs.it",
   "author": "Andrea Franceschini <andrea.franceschini@gmail.com>",
   "private": true,
@@ -19,7 +19,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.3.1",
     "@nuxtjs/axios": "^5.3.2",
     "@nuxtjs/google-analytics": "^2.0.2",
-    "@nuxtjs/markdownit": "^1.2.1",
+    "@digibytes/markdownit": "^1.2.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "cookie-universal-nuxt": "^2.0.5",
     "cookieparser": "^0.1.0",

@@ -52,7 +52,7 @@ module.exports = {
         return process.env.NODE_ENV !== 'production';
       },
     }],
-    [ '@nuxtjs/markdownit', {
+    [ '@digibytes/markdownit', {
       injected: true,
       html: true,
     }],
@@ -64,6 +64,7 @@ module.exports = {
         { code: 'en', iso: 'en-GB', name: 'English', file: 'en-GB.js' },
         { code: 'it', iso: 'it-IT', name: 'Italiano', file: 'it-IT.js' }
       ],
+      seo: false,
       lazy: true,
       langDir: 'langs/',
       vueI18n: {
