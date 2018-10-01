@@ -5,7 +5,7 @@
 
                 <!-- List of jobs -->
                 <b-row class="mt-0 mt-lg-3">
-                    <b-col v-if="jobsTable.length == 0">
+                    <b-col v-if="jobsTable.length > 0">
                         <b-table id="jobs_list_table" :items="jobsTable" :fields="fields" :filter="filterTable" sort-by="deadline" sort-asc stacked="md" small>
                             <span slot="employer" slot-scope="data" v-html="data.value" />
                             <nuxt-link slot="description" slot-scope="data" :to="localePath({ name: 'jobs-id', params: { id: data.item.id }})">{{ data.value }}</nuxt-link>
