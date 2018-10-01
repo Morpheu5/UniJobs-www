@@ -36,13 +36,22 @@ module.exports = {
         description_h: 'Job Description',
         job_title_h: 'Job Title',
         employer_h: 'Employer',
+        scientific_sector_h: 'Sector',
         deadline_h: 'Deadline',
         include_expired_h: 'Include expired offers',
+        report_job_title: 'Tell us about a job offer',
+        report_job_message: 'Do you know of a job offer out there? Paste the URL below and click the button!',
+        report_placeholder: 'http://…',
+        report_button: 'Submit',
+        report_success: 'Thank you for letting us know! We will look into this as soon as we can.',
+        report_failure: 'That does not look like a valid URL (e.g., https://www.example.com)',
     },
     job_page: {
         meta: {
             at_a_glance: 'At a glance',
             job_title: 'Job title',
+            contest_sector: 'Contest sector',
+            scientific_sector: 'Scientific-disciplinary sector',
             institution: 'Institution',
             salary: 'Salary',
             tax_status: {

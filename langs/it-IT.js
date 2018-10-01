@@ -36,13 +36,22 @@ module.exports = {
         description_h: 'Descrizione',
         job_title_h: 'Titolo',
         employer_h: 'Istituto',
+        scientific_sector_h: 'Settore',
         deadline_h: 'Scadenza',
         include_expired_h: 'Includi offerte scadute',
+        report_job_title: 'Segnalaci offerte di lavoro',
+        report_job_message: 'Qualcuno sta offrendo un lavoro? Incolla lo URL qui sotto e schiaccia il bottone!',
+        report_placeholder: 'http://…',
+        report_button: 'Invia',
+        report_success: 'Grazie della segnalazione! La esamineremo al più presto possibile.',
+        report_failure: 'Non sembra un URL valido (es. https://www.example.com)',
     },
     job_page: {
         meta: {
             at_a_glance: 'Panoramica',
             job_title: 'Titolo',
+            contest_sector: 'Settore concorsuale',
+            scientific_sector: 'Settore scientifico-disciplinare',
             institution: 'Istituto',
             salary: 'Stipendio',
             tax_status: {
