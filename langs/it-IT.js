@@ -22,9 +22,8 @@ module.exports = {
     contact_page: {
         title: 'Contattaci',
         message: `
-            <p>Vogliamo sapere cosa pensi!</p>
-            <p>Non siamo ancora prontissimi col reparto comunicazioni, ma nel frattemo puoi mandare una e-mail ad
-                <a href="mailto:andrea.franceschini@gmail.com">andrea.franceschini@gmail.com</a>.
+            <p>Vogliamo sapere cosa pensi! Puoi mandare una e-mail ad
+                <a href="mailto:info@unijobs.it">info@unijobs.it</a>.
             </p>
         `,
     },

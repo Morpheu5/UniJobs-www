@@ -22,9 +22,8 @@ module.exports = {
     contact_page: {
         title: 'Contact Us',
         message: `
-            <p>We'd love to hear from you!</p>
-            <p>Although our comms are not yet fully set up, you can reach out via e-mail at
-                <a href="mailto:andrea.franceschini@gmail.com">andrea.franceschini@gmail.com</a>.
+            <p>We'd love to hear from you! You can reach out via e-mail at
+                <a href="mailto:info@unijobs.it">info@unijobs.it</a>.
             </p>
         `,
     },
