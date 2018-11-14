@@ -8,6 +8,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'unijobs.it' }
     ],
     link: [
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Mono:400,700|Titillium+Web:300,400,600,700' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
