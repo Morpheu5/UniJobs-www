@@ -10,12 +10,18 @@ $theme-colors: (
   "light": white
 );
 
-// @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss";
-@import "node_modules/bootstrap-italia/src/icons/css/italia-icon-font.css";
 
 .form-group input[required]+label:after { 
   color: theme-color('danger');
   content: "*";
   margin-left: 0.25em;
+}
+
+body {
+  background: theme-color('secondary');
+
+  .page-sheet {
+    background: white;
+  }
 }

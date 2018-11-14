@@ -27,15 +27,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-@import '@/assets/_custom_theme.scss';
-
-body {
-    background: theme-color('secondary');
-
-    .page-sheet {
-        background: white;
-    }
-}
-</style>
