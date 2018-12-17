@@ -12,16 +12,16 @@
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item-dropdown :text="currentLocale.name" right>
+                    <b-nav-item-dropdown :text="currentLocale.name" class="language-selector" right>
                         <b-dropdown-item v-for="locale in $i18n.locales" :key="locale.code" :href="switchLocalePath(locale.code)" :active="locale.code === currentLocale.code">{{ locale.name }}</b-dropdown-item>
                     </b-nav-item-dropdown>
 
-                    <b-nav-item-dropdown v-if="loggedIn" :title="$t('user')" no-caret right>
+                    <b-nav-item-dropdown v-if="loggedIn" :title="$t('user')" class="profile-menu" no-caret right>
                         <template slot="text"><fa :icon="['fas', 'smile']" size="lg" /></template>
                         <b-dropdown-item :href="localePath({ name: 'user-profile' })">{{ $t('profile') }}</b-dropdown-item>
                         <b-dropdown-item @click="doTheLogout">{{ $t('logout') }}</b-dropdown-item>
                     </b-nav-item-dropdown>
-                    <b-nav-item v-else :href="localePath('user-login')" right>{{ $t('login') }}</b-nav-item>
+                    <b-nav-item v-else :href="localePath('user-login')" class="login-item" right>{{ $t('login') }}</b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
         </b-container>
