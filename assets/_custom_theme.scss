@@ -10,7 +10,7 @@ $theme-colors: (
   "light": white
 );
 
-@import "node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss";
+@import "~bootstrap-italia/src/scss/bootstrap-italia.scss";
 
 .form-group input[required]+label:after { 
   color: theme-color('danger');

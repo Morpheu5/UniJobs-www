@@ -29,7 +29,8 @@ module.exports = {
     }
   },
   css: [
-    '@/assets/_custom_theme.scss'
+    '@/assets/_custom_theme.scss',
+    // '@/node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss'
   ],
   router: {
     middleware: [
