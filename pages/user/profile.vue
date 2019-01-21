@@ -55,7 +55,6 @@
 
                 <b-list-group class="organizations mt-4">
                     <b-list-group-item v-for="organization in user.organizations" :key="organization[organization.length-1].id">
-                        <!-- <fa :icon="['fas', 'times']" size="sm" class="text-danger mr-3" /> -->
                         <span :inner-html.prop="organization | formatPath" />
                     </b-list-group-item>
                 </b-list-group>
@@ -76,6 +75,9 @@
                                 />
                                 <label :class="oldPassword != '' ? 'active' : null" for="oldPasswordInput">{{ $t('old_password') }}</label>
                                 <span :class="showOldPassword ? 'eye-on' : 'eye-off'" class="btn-eye" style="left: -1.5em" @click="showOldPassword = !showOldPassword"></span>
+                                <svg class="icon icon-sm icon-secondary ml-2 mr-3 mb-1 show-password" @click="showOldPassword = !showOldPassword">
+                                    <use :xlink:href="bispritesvg + (showPassword ? '#it-password-invisible' : '#it-password-visible')" />
+                                </svg>
                                 <b-form-invalid-feedback>{{ $t('required_field') }}</b-form-invalid-feedback>
                             </b-form-group>
                             <b-form-group>
@@ -87,6 +89,9 @@
                                 />
                                 <label :class="newPassword != '' ? 'active' : null" for="newPasswordInput">{{ $t('new_password') }}</label>
                                 <span :class="showNewPassword ? 'eye-on' : 'eye-off'" class="btn-eye" style="left: -1.5em" @click="showNewPassword = !showNewPassword"></span>
+                                <svg class="icon icon-sm icon-secondary ml-2 mr-3 mb-1 show-password" @click="showNewPassword = !showNewPassword">
+                                    <use :xlink:href="bispritesvg + (showPassword ? '#it-password-invisible' : '#it-password-visible')" />
+                                </svg>
                                 <b-form-invalid-feedback>{{ this.passwordsMatch ? $t('passwords_match') : $t('required_field') }}</b-form-invalid-feedback>
                             </b-form-group>
                         </b-col>
@@ -117,6 +122,13 @@
             }
         }
     }
+
+    .show-password.icon {
+        position: absolute;
+        bottom: 1em;
+        left: -2.5em;
+    }
+
 }
 </style>
 

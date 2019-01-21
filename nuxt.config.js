@@ -30,17 +30,6 @@ module.exports = {
       vue.transformAssetUrls.use = ['href', 'xlink:href'];
     }
   },
-  // loaders: {
-  //   vue: {
-  //     transformAssetUrls: {
-  //       video: ['src', 'poster'],
-  //       source: 'src',
-  //       object: 'src',
-  //       embed: 'src',
-  //       use: ['xlink:href', 'href']
-  //     }
-  //   }
-  // },
   css: [
     '@/assets/_custom_theme.scss'
   ],

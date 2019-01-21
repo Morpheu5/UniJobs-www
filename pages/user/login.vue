@@ -38,8 +38,10 @@
                                  autocomplete="current-password"
                                  required
                         />
-                        <span :class="showPassword ? 'eye-on' : 'eye-off'" class="btn-eye" style="left: -2.5em" @click="showPassword = !showPassword"></span>
-                        <label :class="password !== '' ? 'active' : null" for="password">
+                        <svg class="icon icon-sm icon-secondary ml-2 mr-3 mb-1 show-password" @click="showPassword = !showPassword">
+                            <use :xlink:href="bispritesvg + (showPassword ? '#it-password-invisible' : '#it-password-visible')" />
+                        </svg>
+                        <label :class="password !== '' ? 'active' : null" name="password" for="password">
                             {{ $t('password') }}
                         </label>
                         <b-form-invalid-feedback>{{ $t('required_field') }}</b-form-invalid-feedback>
@@ -80,6 +82,12 @@
 <style lang="scss">
 .checker {
     visibility: hidden;
+}
+
+.show-password.icon {
+    position: absolute;
+    bottom: 1em;
+    left: -2.5em;
 }
 </style>
 
