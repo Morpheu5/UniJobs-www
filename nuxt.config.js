@@ -17,7 +17,7 @@ module.exports = {
   /* Build configuration */
   build: {
     /* Run ESLint on save */
-    extend (config, { isDev, isClient }) {
+    extend (config, { isDev, isClient, loaders: { vue } }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -26,11 +26,23 @@ module.exports = {
           exclude: /(node_modules)/
         });
       }
+      vue.transformAssetUrls.video = ['src', 'poster'];
+      vue.transformAssetUrls.use = ['href', 'xlink:href'];
     }
   },
+  // loaders: {
+  //   vue: {
+  //     transformAssetUrls: {
+  //       video: ['src', 'poster'],
+  //       source: 'src',
+  //       object: 'src',
+  //       embed: 'src',
+  //       use: ['xlink:href', 'href']
+  //     }
+  //   }
+  // },
   css: [
-    '@/assets/_custom_theme.scss',
-    // '@/node_modules/bootstrap-italia/src/scss/bootstrap-italia.scss'
+    '@/assets/_custom_theme.scss'
   ],
   router: {
     middleware: [

@@ -5,12 +5,10 @@
 
                 <!-- List of jobs -->
                 <b-row class="mt-0 mt-lg-3">
-                    <b-col v-if="jobsTable.length > 0">
-                        <b-table id="jobs_list_table" :items="jobsTable" :fields="fields" :filter="filterTable" sort-by="deadline" sort-asc stacked="md" small>
-                            <span slot="employer" slot-scope="data" v-html="data.value" />
-                            <nuxt-link slot="description" slot-scope="data" :to="localePath({ name: 'jobs-id', params: { id: data.item.id }})">{{ data.value }}</nuxt-link>
-                        </b-table>
-                    </b-col>
+                    <b-table v-if="jobsTable.length > 0" id="jobs_list_table" :items="jobsTable" :fields="fields" sort-by="deadline" sort-asc stacked="md" small>
+                        <span slot="employer" slot-scope="data" v-html="data.value" />
+                        <nuxt-link slot="description" slot-scope="data" :to="localePath({ name: 'jobs-id', params: { id: data.item.id }})">{{ data.value }}</nuxt-link>
+                    </b-table>
 
                     <!-- No jobs -->
                     <b-col lg="8" offset-lg="2" v-else>
@@ -20,7 +18,7 @@
                 </b-row>
 
                 <!-- Report a job -->
-                <b-row class="mt-3">
+                <b-row class="mt-5">
                     <b-col lg="8" offset-lg="2">
                         <b-form novalidate @submit="reportJob">
                             <b-row>
@@ -54,26 +52,44 @@
         </b-row>
         <b-row>
             <b-col md="6" offset-md="0" lg="4" offset-lg="2">
-                <b-card class="mt-5 mt-lg-5">
-                    <p v-if="currentLocale.iso == 'en-GB'">
-                        Finding a job in the Italian academia can be hard. Searching for it should not be a nightmare too!
-                    </p>
-                    <p v-if="currentLocale.iso == 'it-IT'">
-                        Trovare un lavoro nell'accademia italiana può essere difficile. Cercarlo non dovrebbe essere un incubo, però!
-                    </p>
-                    <b-btn :href="localePath({ name: 'slug', params: { slug: 'about'} })" variant="primary" class="mt-4">{{ $t('main_menu.about_us') }} ›</b-btn>
-                </b-card>
+                <div class="card-wrapper card-space mt-5 mt-lg-5">
+                    <div class="card card-bg">
+                        <div class="card-body">
+                            <h5 class="card-title" v-if="currentLocale.iso == 'en-GB'">
+                                Finding a job in the Italian academia can be hard. Searching for it should not be a nightmare too!
+                            </h5>
+                            <h5 class="card-title" v-if="currentLocale.iso == 'it-IT'">
+                                Trovare un lavoro nell'accademia italiana può essere difficile. Cercarlo non dovrebbe essere un incubo, però!
+                            </h5>
+                            <a :href="localePath({ name: 'slug', params: { slug: 'about'} })" class="read-more">
+                                <span class="text">{{ $t('main_menu.about_us') }}</span>
+                                <svg class="icon">
+                                    <use :xlink:href="bispritesvg + '#it-arrow-right'" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </b-col>
             <b-col md="6" lg="4">
-                <b-card class="mt-5 mt-lg-5">
-                    <p v-if="currentLocale.iso == 'en-GB'">
-                        We'd love to hear from you! Please get in touch if you want to share your ideas, help us out, or just say hi!
-                    </p>
-                    <p v-if="currentLocale.iso == 'it-IT'">
-                        Vogliamo sapere cosa pensi! Contattaci se vuoi condividere un'idea, aiutarci, o anche solo per un saluto!
-                    </p>
-                    <b-btn :href="localePath('contact')" variant="primary" class="mt-4">{{ $t('contact_page.title') }} ›</b-btn>
-                </b-card>
+                <div class="card-wrapper card-space mt-5 mt-lg-5">
+                    <div class="card card-bg">
+                        <div class="card-body">
+                            <h5 class="card-title" v-if="currentLocale.iso == 'en-GB'">
+                                We'd love to hear from you! Please get in touch if you want to share your ideas, help us out, or just say hi!
+                            </h5>
+                            <h5 class="card-title" v-if="currentLocale.iso == 'it-IT'">
+                                Vogliamo sapere cosa pensi! Contattaci se vuoi condividere un'idea, aiutarci, o anche solo per un saluto!
+                            </h5>
+                            <a :href="localePath('contact')" class="read-more">
+                                <span class="text">{{ $t('contact_page.title') }}</span>
+                                <svg class="icon">
+                                    <use :xlink:href="bispritesvg + '#it-arrow-right'" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </b-col>
         </b-row>
     </div>
@@ -84,6 +100,8 @@
 
 #jobs_list {
     #jobs_list_table {
+        font-size: smaller;
+
         @include media-breakpoint-down(sm) {
             tr {
                 border-bottom: 2px solid $table-border-color;
@@ -124,6 +142,8 @@
 
 
 <script>
+// import sprites from 'assets/sprite.svg';
+
 export default {
     filters: {
         formatPath(path) {
@@ -175,13 +195,13 @@ export default {
                 job_title: job.metadata.job_title[this.$i18n.locale].content,
                 employer: job.organization.ancestors,
                 deadline: job.metadata.deadline,
-            }));
+            })).filter(this.filterTable);
         }
     },
     methods: {
         filterTable(job, _index, _jobs) {
             // FIXME The employer part needs tokenization. Perhaps build another function.
-            return job.description.includes(this.searchFilters.description)
+            return job.description.includes(this.searchFilters.description.toLocaleLowerCase())
                    && (job.employer.some(e => e.name.toLocaleLowerCase().includes(this.searchFilters.employer.toLocaleLowerCase())
                       || e.short_name.toLocaleLowerCase().includes(this.searchFilters.employer.toLocaleLowerCase())))
                    && (new Date(job.deadline) >= new Date() || this.searchFilters.include_expired);
