@@ -180,12 +180,6 @@ export default {
             reportJobOutcome: false,
         };
     },
-    async asyncData({ app, _params }) {
-        const [ jobsResponse ] = await Promise.all([
-            app.$axios.get('/api/contents?content_type=job')
-        ]);
-        return { jobs: jobsResponse.data };
-    },
     computed: {
         jobsTable() {
             return this.jobs.map(job => ({
@@ -197,6 +191,12 @@ export default {
                 deadline: job.metadata.deadline,
             })).filter(this.filterTable);
         }
+    },
+    async asyncData({ app, _params }) {
+        const [ jobsResponse ] = await Promise.all([
+            app.$axios.get('/api/contents?content_type=job')
+        ]);
+        return { jobs: jobsResponse.data };
     },
     methods: {
         filterTable(job, _index, _jobs) {
