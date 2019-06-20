@@ -17,7 +17,7 @@ module.exports = {
         cookies: 'Cookie',
         contact: 'Contattaci',
         help_us: 'Aiutaci',
-        content_license: 'Tutti i contenuti di questo sito, escluse le offerte di lavoro, sono rilasciati con una licenza <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons</a>.',
+        content_license: 'Tutti i contenuti di questo sito, escluse le offerte di lavoro, sono rilasciati con una licenza <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons</a>. Le offerte presentate in questo sito potrebbero non essere accurate, fare sempre riferimento ai collegamenti forniti.',
     },
     contact_page: {
         title: 'Contattaci',

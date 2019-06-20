@@ -3,11 +3,15 @@
         <b-col>
             <div>
                 <b-badge v-if="isExpired" variant="danger text-white" pill>{{ $t('job_page.meta.deadline_expired') }}</b-badge>
+                <aside class="heading-organization">{{ job.organization.ancestors.slice(1) | formatPathLong }}</aside>
                 <h2 class="mb-5">
                     {{ job.title[currentLocale.code] }}
                 </h2>
 
                 <section class="job-description">
+                    <p><span v-if="job.metadata.contest_sector" class="mr-5">{{ $t('job_page.meta.contest_sector') }}: <strong>{{ job.metadata.contest_sector }}</strong></span>
+                       <span v-if="job.metadata.scientific_sector">{{ $t('job_page.meta.scientific_sector') }}: <strong>{{ job.metadata.scientific_sector }}</strong></span>
+                    </p>
                     <ContentBlock
                         v-for="block in job.content_blocks"
                         :key="`${job.id}-${block.id}`"
@@ -15,17 +19,13 @@
                         :locale="currentLocale"
                         :data="block"
                     />
-                    <hr />
-                    <p><span v-if="job.metadata.contest_sector" class="mr-5">{{ $t('job_page.meta.contest_sector') }}: <strong>{{ job.metadata.contest_sector }}</strong></span>
-                       <span v-if="job.metadata.scientific_sector">{{ $t('job_page.meta.scientific_sector') }}: <strong>{{ job.metadata.scientific_sector }}</strong></span>
-                    </p>
                 </section>
             </div>
         </b-col>
         <b-col lg="4" class="small">
             <h4 class="mb-3">{{ $t('job_page.meta.at_a_glance') }}</h4>
             <p v-if="job.metadata.job_title">{{ $t('job_page.meta.job_title') }}: <strong>{{ job.metadata.job_title[currentLocale.code].content }}</strong></p>
-            <p><!--{{ $t('job_page.meta.institution') }}: --><strong>{{ job.organization.ancestors.slice(1) | formatPath }}</strong></p>
+            <!-- <p>{{ $t('job_page.meta.institution') }}:<strong>{{ job.organization.ancestors.slice(1) | formatPath }}</strong></p> -->
             <p v-if="job.metadata.salary">{{ $t('job_page.meta.salary') }}: <strong>&euro; {{ job.metadata.salary }}</strong><span v-if="job.metadata.tax_status"> ({{ $t(`job_page.meta.tax_status.${job.metadata.tax_status}`) }})</span></p>
             <p v-if="job.metadata.deadline" :class="isExpired ? 'text-danger' : ''">
                 {{ $t('job_page.meta.deadline') }}: <strong>{{ job.metadata.deadline | formatDeadline(currentLocale) }}</strong>
@@ -46,6 +46,9 @@ export default {
     filters: {
         formatPath(path) {
             return path ? path.map((e, i, a) => (i < a.length-1 ? e.short_name : e.name)).join(' › ') : '';
+        },
+        formatPathLong(path) {
+            return path ? path.map(e => e.name).join(' › ') : '';
         },
         formatDeadline(d, locale) {
             let date = new Date(d);

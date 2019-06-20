@@ -17,7 +17,7 @@ module.exports = {
         cookies: 'Cookies',
         contact: 'Contact Us',
         help_us: 'Help Us',
-        content_license: 'All the content on this site, job offers excluded, are published under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons</a> license.',
+        content_license: 'All the content on this site, job offers excluded, are published under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons</a> license. The jobs offers on this site may not be accurate, please always refer to the links provided.',
     },
     contact_page: {
         title: 'Contact Us',
