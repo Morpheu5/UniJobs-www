@@ -16,6 +16,7 @@ module.exports = {
   loading: { color: '#1E90FF' },
   /* Build configuration */
   build: {
+    extractCSS: true,
     /* Run ESLint on save */
     extend (config, { isDev, isClient, loaders: { vue } }) {
       if (isDev && isClient) {

@@ -39,9 +39,26 @@
 <script>
 import ContentBlock from '~/components/ContentBlock';
 
+import _truncate from 'lodash/truncate';
+
 export default {
     components: {
         ContentBlock
+    },
+    head() {
+        return {
+            title: this.job.title[this.currentLocale.code] + " — UniJobs.it",
+            meta: [
+                { name: 'description', hid: 'description', content: this.description },
+                { name: 'og:title', content: this.job.title[this.currentLocale.code] },
+                { name: 'og:description', content: this.description },
+                { name: 'og:type', content: 'website' },
+                { name: 'og:url', content: `https://www.unijobs.it${this.localePath({ name: 'jobs-id', params: { id: this.job.id }})}` },
+                { name: 'og:locale', content: this.currentLocale.iso.replace('-', '_') },
+                { name: 'twitter:site', content: '@unijobsit' },
+                { name: 'twitter:card', content: 'summary' }
+            ]
+        };
     },
     filters: {
         formatPath(path) {
@@ -68,6 +85,16 @@ export default {
             let today = new Date();
             let deadline = new Date(this.job.metadata.deadline);
             return today >= deadline;
+        },
+        description() {
+            const l = this.currentLocale.code;
+            return `
+                ${this.$options.filters.formatPathLong([this.job.organization.ancestors.slice(1)[0]])}
+                ${{en:'seeks a', it:'cerca un/a'}[l]} ${this.job.metadata.job_title[l].content}
+                (${{en:'sector', it:'settore'}[l]} ${this.job.metadata.contest_sector} ${this.job.metadata.scientific_sector},
+                ${{en:'deadline', it:'scadenza'}[l]} ${this.$options.filters.formatDeadline(this.job.metadata.deadline, this.currentLocale)})
+                ${_truncate(this.job.content_blocks[0].body[l].content, { length: 200, omission: ' …', separator: ' ' })}
+            `.replace(/[\n\r]/gm, ' ').replace(/\s\s*/gm, ' ').trim();
         }
     },
     validate({ params }) {

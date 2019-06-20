@@ -142,12 +142,23 @@
 
 
 <script>
-// import sprites from 'assets/sprite.svg';
-
 export default {
+    head() {
+        const description = {
+            it: 'Offerte di lavoro nella Ricerca in Italia presentate in modo chiaro.',
+            en: 'Research job offers in Italy, presented clearly.'
+        }[this.currentLocale.code];
+        return {
+            title: `UniJobs.it — ${this.$t('headline')}`,
+            meta: [
+                { name: 'description', hid: 'description', content: description },
+                { name: 'og:description', content: description }
+            ]
+        };
+    },
     filters: {
         formatPath(path) {
-            return path ? path.map((e, i, a) => (i < a.length-1 ? `<span class="short_name">${e.short_name}</span>` : `<span class="name long_name">${e.name} (${e.short_name})</span>`)).join('') : '';
+            return path ? path.map((e, i, a) => (i < a.length-1 ? `<span class="short_name">${e.name}</span>` : `<span class="name long_name">${e.name}</span>`)).join('') : '';
         },
         formatDeadline(d, locale) {
             let date = new Date(d);
@@ -187,7 +198,7 @@ export default {
                 description: job.title[this.$i18n.locale],
                 scientific_sector: job.metadata.scientific_sector,
                 job_title: job.metadata.job_title[this.$i18n.locale].content,
-                employer: job.organization.ancestors,
+                employer: job.organization.ancestors.length > 1 ? job.organization.ancestors.slice(1) : job.organization.ancestors,
                 deadline: job.metadata.deadline,
             })).filter(this.filterTable);
         }

@@ -1,13 +1,16 @@
 <template>
     <header id="site-header" class="bg-primary text-light">
-        <div id="verenv" v-if="$store.state.www_environment !== 'production'" class="float-right mr-2 mt-1 text-right">
+        <!-- <div id="verenv" v-if="$store.state.www_environment !== 'production'" class="float-right mr-2 mt-1 text-right">
             <p class="small"><strong>{{ $store.state.www_version }} &nbsp; {{ $store.state.www_environment }}</strong></p>
-        </div>
+        </div> -->
         <b-container>
             <b-row align-v="center">
                 <b-col>
-                    <h1 class="mt-3">UniJobs.it</h1>
-                    <p v-t="'headline'" class="headline"></p>
+                    <h1 class="mt-3"><a href="/">UniJobs.it</a></h1>
+                    <p class="headline">
+                        <span><strong>{{ $t('headline') }}</strong></span>
+                        <span id="header-language" class="d-block d-sm-none pr-3 text-right"><a :href="switchLocalePath(otherLocale.code)" ><strong>{{ otherLocale.name }}</strong></a></span>
+                    </p>
                     <div id="beta-banner">beta</div>
                 </b-col>
             </b-row>
@@ -17,12 +20,27 @@
 
 <style lang="scss">
 #site-header {
+    position: relative;
+
     h1 {
         color: white;
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
     }
 
     .headline {
         color: white;
+    }
+
+    #header-language {
+        float: right;
+
+        a {
+            color: white;
+        }
     }
 }
 #beta-banner {
@@ -40,12 +58,22 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 
     @keyframes swing {
-    0%, 100% { transform: rotate(-25deg); }
-    50% { transform: rotate(-20deg); }
+        0%, 100% { transform: rotate(-25deg); }
+        50% { transform: rotate(-15deg); }
     }
 
     &:hover {
-    animation: swing 1s infinite ease-in-out;
+        animation: swing 0.5s 3 ease-in-out;
     }
 }
 </style>
+
+<script>
+export default {
+    computed: {
+        otherLocale() {
+            return this.$i18n.locales.filter(l => l.code !== this.currentLocale.code)[0];
+        }
+    }
+};
+</script>

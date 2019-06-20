@@ -20,9 +20,32 @@
 <script>
 import ContentBlock from '~/components/ContentBlock';
 
+import _truncate from 'lodash/truncate';
+
 export default {
     components: {
         ContentBlock
+    },
+    head() {
+        return {
+            title: this.content.title[this.currentLocale.code] + " — UniJobs.it",
+            meta: [
+                { name: 'description', hid: 'description', content: this.description },
+                { name: 'og:title', content: this.content.title[this.currentLocale.code] },
+                { name: 'og:description', content: this.description },
+                { name: 'og:type', content: 'website' },
+                { name: 'og:url', content: `https://www.unijobs.it${this.localePath({ name: 'slug', params: { slug: this.$route.params.slug } })}` },
+                { name: 'og:locale', content: this.currentLocale.iso.replace('-', '_') },
+                { name: 'twitter:site', content: '@unijobsit' },
+                { name: 'twitter:card', content: 'summary' }
+            ]
+        };
+    },
+    computed: {
+        description() {
+            const l = this.currentLocale.code;
+            return _truncate(`${this.content.content_blocks[0].body[l].content}`, { length: 200, omission: '…', separator: ' ' }).replace(/[\n\r]/gm, ' ');
+        }
     },
     async asyncData({ app, error, params }) {
         const response = await app.$axios.get(`/api/contents/slug/${params.slug}`)
