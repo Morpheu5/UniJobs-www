@@ -6,10 +6,10 @@
         <b-container>
             <b-row align-v="center">
                 <b-col>
-                    <h1 class="mt-3"><a href="/">UniJobs.it</a></h1>
+                    <h1 class="mt-3"><nuxt-link :to="localePath('index')">UniJobs.it</nuxt-link></h1>
                     <p class="headline">
                         <span><strong>{{ $t('headline') }}</strong></span>
-                        <span id="header-language" class="d-block d-sm-none pr-3 text-right"><a :href="switchLocalePath(otherLocale.code)" ><strong>{{ otherLocale.name }}</strong></a></span>
+                        <span id="header-language" class="d-block d-sm-none pr-3 text-right"><nuxt-link :to="switchLocalePath(otherLocale.code)" ><strong>{{ otherLocale.name }}</strong></nuxt-link></span>
                     </p>
                     <div id="beta-banner">beta</div>
                 </b-col>

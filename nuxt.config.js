@@ -13,7 +13,7 @@ module.exports = {
     ]
   },
   /* Customize the progress bar color */
-  loading: { color: '#1E90FF' },
+  loading: false, //{ color: '#1E90FF' },
   /* Build configuration */
   build: {
     extractCSS: true,
@@ -97,7 +97,16 @@ module.exports = {
         {
           set: '@fortawesome/free-regular-svg-icons',
           icons: [
-            'faSmile'
+            'faSmile',
+            'faEnvelope'
+          ]
+        },
+        {
+          set: '@fortawesome/free-brands-svg-icons',
+          icons: [
+            'faTwitter',
+            'faFacebook',
+            'faLinkedin'
           ]
         }
       ]
@@ -107,5 +116,6 @@ module.exports = {
     // { src: '~/plugins/toggle_analytics.js', ssr: false },
     '~/plugins/axios.js',
     '~/plugins/utils.js',
+    { src: '~/plugins/vue-social-sharing.js', ssr: false },
   ]
 };

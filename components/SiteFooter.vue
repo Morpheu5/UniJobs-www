@@ -4,14 +4,14 @@
             <b-row>
                 <b-col cols="3" class="link-list-wrapper">
                     <ul class="link-list">
-                        <li><a :href="localePath({ name: 'slug', params: { slug: 'privacy'} })" class="text-white">{{ $t('footer.privacy') }}</a></li>
-                        <li><a :href="localePath({ name: 'slug', params: { slug: 'cookies'} })" class="text-white">{{ $t('footer.cookies') }}</a></li>
+                        <li><nuxt-link :to="localePath({ name: 'slug', params: { slug: 'privacy'} })" class="text-white">{{ $t('footer.privacy') }}</nuxt-link></li>
+                        <li><nuxt-link :to="localePath({ name: 'slug', params: { slug: 'cookies'} })" class="text-white">{{ $t('footer.cookies') }}</nuxt-link></li>
                     </ul>
                 </b-col>
                 <b-col cols="3" class="link-list-wrapper">
                     <ul class="link-list">
-                        <li><a :href="localePath({ name: 'slug', params: { slug: 'contact'} })" class="text-white">{{ $t('footer.contact') }}</a></li>
-                        <li><a :href="localePath({ name: 'slug', params: { slug: 'help-us'} })" class="text-white">{{ $t('footer.help_us') }}</a></li>
+                        <li><nuxt-link :to="localePath({ name: 'slug', params: { slug: 'contact'} })" class="text-white">{{ $t('footer.contact') }}</nuxt-link></li>
+                        <li><nuxt-link :to="localePath({ name: 'slug', params: { slug: 'help-us'} })" class="text-white">{{ $t('footer.help_us') }}</nuxt-link></li>
                     </ul>
                 </b-col>
                 <b-col cols="6">

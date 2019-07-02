@@ -1,6 +1,6 @@
 {
   "name": "www",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "UniJobs.it",
   "author": "Andrea Franceschini <andrea.franceschini@gmail.com>",
   "private": true,
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@digibytes/markdownit": "^1.2.2",
+    "@fortawesome/free-brands-svg-icons": "^5.9.0",
     "@fortawesome/free-regular-svg-icons": "^5.9.0",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@nuxtjs/axios": "^5.5.4",
@@ -30,7 +31,8 @@
     "nuxt": "^2.8.1",
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-i18n": "^5.12.4",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "vue-social-sharing": "^2.4.5"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

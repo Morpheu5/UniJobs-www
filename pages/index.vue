@@ -12,7 +12,7 @@
 
                     <!-- No jobs -->
                     <b-col lg="8" offset-lg="2" v-else>
-                        <h3>{{ $t('jobs_list.no_jobs_h') }} 😱 <a :href="localePath({ name: 'slug', params: { slug: 'help-us'} })"><fa :icon="['fas', 'arrow-circle-right']" class="ml-2 mr-3 small mb-1" />{{ $t('footer.help_us') }}!</a></h3>
+                        <h3>{{ $t('jobs_list.no_jobs_h') }} 😱 <nuxt-link :to="localePath({ name: 'slug', params: { slug: 'help-us'} })"><fa :icon="['fas', 'arrow-circle-right']" class="ml-2 mr-3 small mb-1" />{{ $t('footer.help_us') }}!</nuxt-link></h3>
                         <p>{{ $t('jobs_list.no_jobs_message') }}</p>
                     </b-col>
                 </b-row>
@@ -61,12 +61,12 @@
                             <h5 class="card-title" v-if="currentLocale.iso == 'it-IT'">
                                 Trovare un lavoro nell'accademia italiana può essere difficile. Cercarlo non dovrebbe essere un incubo, però!
                             </h5>
-                            <a :href="localePath({ name: 'slug', params: { slug: 'about'} })" class="read-more">
+                            <nuxt-link :to="localePath({ name: 'slug', params: { slug: 'about'} })" class="read-more">
                                 <span class="text">{{ $t('main_menu.about_us') }}</span>
                                 <svg class="icon">
                                     <use :xlink:href="bispritesvg + '#it-arrow-right'" />
                                 </svg>
-                            </a>
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>
@@ -81,12 +81,12 @@
                             <h5 class="card-title" v-if="currentLocale.iso == 'it-IT'">
                                 Vogliamo sapere cosa pensi! Contattaci se vuoi condividere un'idea, aiutarci, o anche solo per un saluto!
                             </h5>
-                            <a :href="localePath('contact')" class="read-more">
+                            <nuxt-link :to="localePath('contact')" class="read-more">
                                 <span class="text">{{ $t('contact_page.title') }}</span>
                                 <svg class="icon">
                                     <use :xlink:href="bispritesvg + '#it-arrow-right'" />
                                 </svg>
-                            </a>
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>
