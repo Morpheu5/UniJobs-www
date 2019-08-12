@@ -162,7 +162,11 @@ export default {
         },
         hashtags() {
             let hashtags = [this.job.organization.ancestors.length > 1 ? this.job.organization.ancestors[1].short_name : this.job.organization.ancestors[0].short_name, 'UniJobs'];
-            return hashtags.filter((item, index, array) => array.indexOf(item) == index).join(',');
+            let localeHashtags = {
+                it: ['ricerca', 'lavoro', 'Italia', 'AcademicTwitter'],
+                en: ['research', 'jobs', 'Italy', 'EU', 'AcademicTwitter']
+            }[this.$i18n.locale];
+            return [...hashtags, ...localeHashtags].filter((item, index, array) => array.indexOf(item) == index).join(',');
         },
         jobTitle() {
             if (this.job.metadata.job_title) {
@@ -177,9 +181,19 @@ export default {
     validate({ params }) {
         return /^\d+$/.test(params.id);
     },
-    async asyncData({ app, params }) {
-        const jobResponse = await app.$axios.get(`/api/contents/${params.id}?content_type=job`).catch(e => { console.log(e); });
-        return { job: jobResponse.data };
+    asyncData({ app, params, error }) {
+        return app.$axios
+            .get(`/api/contents/${params.id}?content_type=job`)
+            .then(res => {
+                return { job: res.data };
+            })
+            .catch(e => {
+                if (e.response) {
+                    error({ statusCode: e.response.data.status, message: e.response.data.error });
+                } else {
+                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
+                }
+            });
     }
 };
 </script>

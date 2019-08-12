@@ -51,7 +51,7 @@
             <b-row>
                 <b-col lg="4" offset-lg="4">
                     <b-alert :show="loginFailed" variant="warning" class="mt-3">
-                        {{ $t('login_failure_message') }}
+                        {{ $t('login_failure_message') }}<br/>{{ loginFailureError }}
                     </b-alert>
                 </b-col>
             </b-row>
@@ -61,7 +61,7 @@
                         {{ $t('signup_success_message') }}
                     </b-alert>
                     <b-alert :show="signupOutcome === 'fail'" variant="warning" class="mt-3">
-                        {{ $t('signup_failure_message') }}
+                        {{ $t('signup_failure_message') }}<br/>{{ signupFailureError }}
                     </b-alert>
 
                 </b-col>
@@ -102,7 +102,9 @@ export default {
             showPassword: false,
             emailVerificationStatus: null,
             loginFailed: false,
+            loginFailureError: '',
             signupOutcome: null,
+            signupFailureError: '',
             validated: null,
             emailValidationFeedback: ''
         };
@@ -134,15 +136,18 @@ export default {
                     this.$axios.post(
                         '/api/login',
                         { email: this.email, password: this.password }
-                    ).then(response => {
+                    )
+                    .then(response => {
                         if (response.data.token) {
                             this.$store.commit('updateAuthToken', response.data.token);
                             this.$router.push({ path: this.$route.query.redirect || '/' });
                         } else {
                             this.loginFailed = true;
                         }
-                    }).catch(_error => {
+                    })
+                    .catch(e => {
                         this.loginFailed = true;
+                        this.loginFailureError = e.response ? e.response.data.error : `${e.code} ${e.address}:${e.port}`;
                     });
                 } else if (action === 'signup') {
                     this.$axios.post(
@@ -150,8 +155,9 @@ export default {
                         { user: { email: this.email, password: this.password } }
                     ).then(_response => {
                         this.signupOutcome = 'success';
-                    }).catch(_error => {
+                    }).catch(e => {
                         this.signupOutcome = 'fail';
+                        this.signupFailureError = e.response ? e.response.data.error : `${e.code} ${e.address}:${e.port}`;
                     });
                 }
             } else {

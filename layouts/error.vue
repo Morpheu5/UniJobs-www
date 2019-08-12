@@ -1,7 +1,9 @@
 <template>
     <div class="container">
-        <h1>{{ $t(`e${error.statusCode}_headline`) }}</h1>
-        <p>{{ $t(`e${error.statusCode}_message`) }}</p>
+        <h1>{{ $t(`errors.e${error.statusCode}_headline`) }}</h1>
+        <p>{{ $t(`errors.e${error.statusCode}_message`) }}</p>
+        <p>{{ $t(`errors.server_says`) }}:</p>
+        <pre>{{ error.message }}</pre>
     </div>
 </template>
 

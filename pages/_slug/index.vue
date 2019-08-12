@@ -47,13 +47,19 @@ export default {
             return _truncate(`${this.content.content_blocks[0].body[l].content}`, { length: 200, omission: '…', separator: ' ' }).replace(/[\n\r]/gm, ' ');
         }
     },
-    async asyncData({ app, error, params }) {
-        const response = await app.$axios.get(`/api/contents/slug/${params.slug}`)
-                                         .catch(({response}) => error({
-                                             statusCode: response.status,
-                                             params: params,
-                                         }));
-        return { content: response.data };
+    asyncData({ app, error, params }) {
+        return app.$axios
+            .get(`/api/contents/slug/${params.slug}`)
+            .then(res => {
+                return { content: res.data };
+            })
+            .catch(e => {
+                if (e.response) {
+                    error({ statusCode: e.response.data.status, message: e.response.data.error });
+                } else {
+                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
+                }
+            });
     }
 };
 </script>

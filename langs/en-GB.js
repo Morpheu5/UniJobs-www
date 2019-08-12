@@ -1,6 +1,4 @@
 module.exports = {
-    e404_headline: 'Page not found',
-    e404_message: 'This page does not exist.',
     headline: 'Academic jobs in Italy',
     cookie_banner: {
         message: `This web site uses technical and analytical cookies, both from us and from third parties.<br />
@@ -108,4 +106,14 @@ module.exports = {
     female: 'Female',
     other_gender: 'Other',
     unspecified_gender: 'Prefer not to say',
+
+    errors: {
+        server_says: 'Server says',
+        
+        e404_headline: '404 Page not found',
+        e404_message: 'This page does not seem to exist.',
+        
+        e500_headline: '500 Server error',
+        e500_message: 'An internal server error happened. We are working on it.'
+    }
 };

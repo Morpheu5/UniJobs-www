@@ -1,6 +1,4 @@
 module.exports = {
-    e404_headline: 'Pagina non trovata',
-    e404_message: 'Questa pagina non esiste.',
     headline: 'Lavori accademici in Italia',
     cookie_banner: {
         message: `Questo sito utilizza cookie tecnici, analytics e di terze parti.<br />
@@ -109,4 +107,14 @@ module.exports = {
     female: 'Donna',
     other_gender: 'Altro',
     unspecified_gender: 'Preferisco non dirlo',
+
+    errors: {
+        server_says: 'Il server dice',
+        
+        e404_headline: '404 Pagina non trovata',
+        e404_message: 'Questa pagina non esiste.',
+        
+        e500_headline: '500 Errore del server',
+        e500_message: 'Si è verificato un errore interno al server. Ci stiamo lavorando.'
+    }
 };

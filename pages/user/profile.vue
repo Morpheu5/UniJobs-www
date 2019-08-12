@@ -4,7 +4,7 @@
             <b-col lg="7">
                 <h4>{{ $t('your_details_header') }}</h4>
                 <b-form id="profile_details_form" :validated="profileFormValidated" novalidate @submit="saveProfile">
-                    <b-alert :show="profileSaved" dismissible variant="success" @dismissed="profileSaved = false">{{ $t('profile_saved') }}</b-alert>
+                    <b-alert :show="profileSaved" dismissible variant="success" @dismissed="profileSaved = false">{{ $t('profile_saved') }}<br/>{{ profileSaveFailureError }}</b-alert>
                     <b-row class="mt-3">
                         <b-col>
                             <b-form-group>
@@ -62,7 +62,7 @@
             <b-col offset="1" class="mt-5 mt-lg-0">
                 <h4>{{ $t('change_your_password_header') }}</h4>
                 <b-form id="change_password_form" :validated="changePasswordFormValidated" novalidate @submit="changePassword">
-                    <b-alert :show="passwordChanged" dismissible variant="success" @dismissed="passwordChanged = false">{{ $t('password_changed') }}</b-alert>
+                    <b-alert :show="passwordChanged" dismissible variant="success" @dismissed="passwordChanged = false">{{ $t('password_changed') }}<br/>{{ profileSaveFailureError }}</b-alert>
                     <b-row class="mt-3">
                         <b-col>
                             <b-form-group>
@@ -156,6 +156,7 @@ export default {
             showNewPassword: false,
             profileFormValidated: false,
             profileSaved: false,
+            profileSaveFailureError: '',
             changePasswordFormValidated: false,
             passwordsMatch: false,
             passwordChanged: false
@@ -174,6 +175,8 @@ export default {
             e.preventDefault();
             e.stopPropagation();
 
+            this.profileSaveFailureError = '';
+
             const form = document.getElementById('profile_details_form');
             if (form.checkValidity()) {
                 this.$axios.patch(`/api/users/${this.user.id}`, {
@@ -185,9 +188,8 @@ export default {
                 }).then(_response => {
                     this.profileSaved = true;
                     this.profileFormValidated = false;
-                }).catch(_error => {
-                    // TODO Show some error
-                    console.log(_error);
+                }).catch(e => {
+                    this.profileSaveFailureError = e.response ? e.response.data.error : `${e.code} ${e.address}:${e.port}`;
                 });
             }
             this.profileFormValidated = true;
@@ -197,6 +199,7 @@ export default {
             e.stopPropagation();
 
             this.passwordChanged = false;
+            this.profileSaveFailureError = '';
 
             const form = document.getElementById('change_password_form');
             document.getElementById('newPasswordInput').setCustomValidity('');
@@ -213,9 +216,8 @@ export default {
                     }).then(_response => {
                         this.passwordChanged = true;
                         this.changePasswordFormValidated = false;
-                    }).catch(_error => {
-                        // TODO Show some error
-                        console.log(_error);
+                    }).catch(e => {
+                        this.profileSaveFailureError = e.response ? e.response.data.error : `${e.code} ${e.address}:${e.port}`;
                     });
                 }
             }

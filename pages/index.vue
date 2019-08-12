@@ -11,8 +11,8 @@
                     <b-col cols="12" md="4">
                         <p class="job_title">{{ job.job_title }}</p>
                         <p class="sectors">
-                            <b-badge variant="primary" v-for="(s, i) in job.contest_sector" :key="i">{{ s }}</b-badge>
-                            <b-badge variant="primary" v-for="(s, i) in job.scientific_sector" :key="i">{{ s }}</b-badge>
+                            <b-badge variant="primary" v-for="s in job.contest_sector" :key="s">{{ s }}</b-badge>
+                            <b-badge variant="primary" v-for="s in job.scientific_sector" :key="s">{{ s }}</b-badge>
                         </p>
                         <p class="deadline" v-if="job.deadline"><fa :icon="['far', 'calendar-alt']" class="mr-2 text-muted" /> {{ job.deadline | formatDeadline($i18n.locale) }}</p>
                     </b-col>
@@ -211,11 +211,19 @@ export default {
             })).filter(this.filterTable);
         }
     },
-    async asyncData({ app, _params }) {
-        const [ jobsResponse ] = await Promise.all([
-            app.$axios.get('/api/contents?content_type=job')
-        ]);
-        return { jobs: jobsResponse.data };
+    asyncData({ app, _params, error }) {
+        return app.$axios
+            .get('/api/contents?content_type=job')
+            .then(res => {
+                return { jobs: res.data };
+            })
+            .catch(e => {
+                if (e.response) {
+                    error({ statusCode: e.response.data.status, message: e.response.data.error });
+                } else {
+                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
+                }
+            });
     },
     methods: {
         filterTable(job, _index, _jobs) {
@@ -234,13 +242,13 @@ export default {
                 return;
             }
             this.$axios.post('/api/job_reporting', { data: { url: this.reportJobUrl } })
-            .then(_response => {
-                this.reportJobOutcome = 'success';
-                this.reportJobUrl = '';
-            })
-            .catch(_error => {
-                this.reportJobOutcome = 'failure';
-            });
+                .then(_response => {
+                    this.reportJobOutcome = 'success';
+                    this.reportJobUrl = '';
+                })
+                .catch(_error => {
+                    this.reportJobOutcome = 'failure';
+                });
             return false;
         }
     }
