@@ -25,7 +25,6 @@ module.exports = {
   /* Build configuration */
   build: {
     extractCSS: true,
-    parallel: true,
     /* Run ESLint on save */
     extend (config, { isDev, isClient, loaders: { vue } }) {
       if (isDev && isClient) {
@@ -36,6 +35,7 @@ module.exports = {
           exclude: /(node_modules)/
         });
         config.devtool = 'source-map';
+        config.build.parallel = true;
       }
       vue.transformAssetUrls.video = ['src', 'poster'];
       vue.transformAssetUrls.use = ['href', 'xlink:href'];
