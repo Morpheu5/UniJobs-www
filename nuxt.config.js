@@ -5,10 +5,18 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'unijobs.it' }
+      { hid: 'description', name: 'description', content: 'unijobs.it' },
+      { name: 'msapplication-TileColor', content: '#0066cc' },
+      { name: 'theme-color', content: '#ffffff' }
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Mono:400,700|Titillium+Web:300,400,600,700' },
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+      { rel: 'manifest', href: '/site.webmanifest' },
+      { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#0066cc' },
+      { rel: 'shortcut icon', href: '/favicon.ico' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
@@ -17,6 +25,7 @@ module.exports = {
   /* Build configuration */
   build: {
     extractCSS: true,
+    parallel: true,
     /* Run ESLint on save */
     extend (config, { isDev, isClient, loaders: { vue } }) {
       if (isDev && isClient) {
@@ -26,6 +35,7 @@ module.exports = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         });
+        config.devtool = 'source-map';
       }
       vue.transformAssetUrls.video = ['src', 'poster'];
       vue.transformAssetUrls.use = ['href', 'xlink:href'];
@@ -98,7 +108,9 @@ module.exports = {
           set: '@fortawesome/free-regular-svg-icons',
           icons: [
             'faSmile',
-            'faEnvelope'
+            'faEnvelope',
+            'faClock',
+            'faCalendarAlt'
           ]
         },
         {

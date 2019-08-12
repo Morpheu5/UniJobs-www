@@ -35,7 +35,8 @@ module.exports = {
         description_h: 'Job Description',
         job_title_h: 'Job Title',
         employer_h: 'Employer',
-        scientific_sector_h: 'Sector',
+        contest_sector_h: 'Contest sector',
+        scientific_sector_h: 'Scientific-disciplinary sector',
         deadline_h: 'Deadline',
         include_expired_h: 'Include expired offers',
         report_job_title: 'Tell us about a job offer',
@@ -62,6 +63,12 @@ module.exports = {
             deadline_expired_explanation: 'The deadline to apply for this job has expired. It is sometimes possible that applications are accepted after the deadline, but we recommend to get in touch directly with the institution.',
             application_call_btn: 'Apply here!'
         }
+    },
+    job_titles: {
+        'ricercatore-tipo-a': 'Researcher (type A)',
+        'ricercatore-tipo-b': 'Senior Researcher (type B)',
+        'professore-prima-fascia': 'Professor',
+        'professore-seconda-fascia': 'Associate Professor',
     },
     read_more: 'Read more',
     user: 'User',

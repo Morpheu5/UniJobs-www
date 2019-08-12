@@ -2,16 +2,24 @@
     <div id="jobs_list" class="mb-5">
         <b-row>
             <b-col>
-
                 <!-- List of jobs -->
-                <b-row class="mt-0 mt-lg-3">
-                    <b-table v-if="jobsTable.length > 0" id="jobs_list_table" :items="jobsTable" :fields="fields" sort-by="deadline" sort-asc stacked="md" small>
-                        <span slot="employer" slot-scope="data" v-html="data.value" />
-                        <nuxt-link slot="description" slot-scope="data" :to="localePath({ name: 'jobs-id', params: { id: data.item.id }})">{{ data.value }}</nuxt-link>
-                    </b-table>
-
-                    <!-- No jobs -->
-                    <b-col lg="8" offset-lg="2" v-else>
+                <b-row :class="`mt-0 mt-lg-3 py-3 job ${i === jobsTable.length-1 && 'last'}`" v-show="jobsTable.length > 0" v-for="(job, i) in jobsTable" :key="job.id">
+                    <b-col cols="12" md="8">
+                        <p class="description"><nuxt-link :to="localePath({ name: 'jobs-id', params: { id: job.id }})">{{ job.description }}</nuxt-link></p>
+                        <p class="employer" v-html="$options.filters.formatPath(job.employer)"></p>
+                    </b-col>
+                    <b-col cols="12" md="4">
+                        <p class="job_title">{{ job.job_title }}</p>
+                        <p class="sectors">
+                            <b-badge variant="primary" v-for="(s, i) in job.contest_sector" :key="i">{{ s }}</b-badge>
+                            <b-badge variant="primary" v-for="(s, i) in job.scientific_sector" :key="i">{{ s }}</b-badge>
+                        </p>
+                        <p class="deadline" v-if="job.deadline"><fa :icon="['far', 'calendar-alt']" class="mr-2 text-muted" /> {{ job.deadline | formatDeadline($i18n.locale) }}</p>
+                    </b-col>
+                </b-row>
+                <!-- No jobs -->
+                <b-row v-show="jobsTable.length == 0">
+                    <b-col lg="8" offset-lg="2">
                         <h3>{{ $t('jobs_list.no_jobs_h') }} 😱 <nuxt-link :to="localePath({ name: 'slug', params: { slug: 'help-us'} })"><fa :icon="['fas', 'arrow-circle-right']" class="ml-2 mr-3 small mb-1" />{{ $t('footer.help_us') }}!</nuxt-link></h3>
                         <p>{{ $t('jobs_list.no_jobs_message') }}</p>
                     </b-col>
@@ -99,43 +107,39 @@
 @import '@/assets/_custom_theme.scss';
 
 #jobs_list {
-    #jobs_list_table {
-        font-size: smaller;
+    .job {
+        border-bottom: 1px solid $gray-border;
 
-        @include media-breakpoint-down(sm) {
-            tr {
-                border-bottom: 2px solid $table-border-color;
-                padding-top: 1.5em;
-            }
+        &.last {
+            border-bottom: 0;
         }
 
-        @include media-breakpoint-up(md) {
-            td {
-                vertical-align: bottom;
-            }
+        p {
+            margin-bottom: $paragraph-margin-bottom/2;
         }
 
         .employer {
             .long_name {
                 font-weight: bold;
-                display: block;
-            }
-
-            .short_name {
-                font-size: small;
             }
 
             .short_name:after {
                 content: " › ";
             }
         }
-    }
 
-    .card {
-        img {
-            background-color: red;
-            background-blend-mode: multiply;
+        .description {
+            a {
+                font-weight: bold;
+            }
         }
+    }
+}
+
+.card {
+    img {
+        background-color: red;
+        background-blend-mode: multiply;
     }
 }
 </style>
@@ -171,6 +175,9 @@ export default {
                 minute: '2-digit',
                 timeZoneName: 'short',
             });
+        },
+        formatTags(tags) {
+            return tags ? tags.map(tag => `<b-badge pill variant="primary">${tag}</b-badge>`) : '';
         }
     },
     data() {
@@ -196,8 +203,9 @@ export default {
             return this.jobs.map(job => ({
                 id: job.id,
                 description: job.title[this.$i18n.locale],
-                scientific_sector: job.metadata.scientific_sector,
-                job_title: job.metadata.job_title[this.$i18n.locale].content,
+                contest_sector: Array.isArray(job.metadata.contest_sector) ? job.metadata.contest_sector : [job.metadata.contest_sector],
+                scientific_sector: Array.isArray(job.metadata.scientific_sector) ? job.metadata.scientific_sector : [job.metadata.scientific_sector],
+                job_title: job.metadata.job_title ? this.$t(`job_titles.${job.metadata.job_title}`) : (job.metadata.job_title_alt ? job.metadata.job_title_alt[this.$i18n.locale].content : 'N/A'),
                 employer: job.organization.ancestors.length > 1 ? job.organization.ancestors.slice(1) : job.organization.ancestors,
                 deadline: job.metadata.deadline,
             })).filter(this.filterTable);

@@ -9,52 +9,55 @@
                 </h2>
 
                 <section class="job-description">
-                    <b-row align-v="center">
-                        <b-col cols="12" md="8" order="2" order-md="1">
-                            <p><span v-if="job.metadata.contest_sector">{{ $t('job_page.meta.contest_sector') }}: <strong>{{ job.metadata.contest_sector }}</strong></span><br/>
-                               <span v-if="job.metadata.scientific_sector">{{ $t('job_page.meta.scientific_sector') }}: <strong>{{ job.metadata.scientific_sector }}</strong></span>
+                    <b-row align-v="start">
+                        <b-col>
+                            <p>
+                                <big v-if="job.metadata.contest_sector && job.metadata.contest_sector.length > 0"><b-badge variant="primary" v-for="s in job.metadata.contest_sector" :key="s">{{ s }}</b-badge></big>
+                                <big v-if="job.metadata.scientific_sector && job.metadata.scientific_sector.length > 0"><b-badge variant="primary" v-for="s in job.metadata.scientific_sector" :key="s">{{ s }}</b-badge></big>
                             </p>
                         </b-col>
-                        <b-col cols="12" md="4" order="1" order-md="2" class="mb-2 mb-md-0 pr-2 pr-md-0">
-                            <no-ssr>
-                                <aside class="social-share">
-                                    <social-sharing :url="this.canonicalUrl"
-                                                    :title="this.job.title[this.currentLocale.code]"
-                                                    :description="this.description"
-                                                    :hashtags="this.hashtags"
-                                                    inline-template>
-                                        <div>
-                                            <network network="twitter" class="">
-                                                <fa :icon="['fab', 'twitter']" size="lg" />
-                                            </network>
-                                            <network network="facebook" class="">
-                                                <fa :icon="['fab', 'facebook']" size="lg" />
-                                            </network>
-                                            <network network="linkedin" class="">
-                                                <fa :icon="['fab', 'linkedin']" size="lg" />
-                                            </network> 
-                                            <network network="email" class="">
-                                                <fa :icon="['far', 'envelope']" size="lg" />
-                                            </network>
-                                        </div>
-                                    </social-sharing>
-                                </aside>
-                            </no-ssr>
+                    </b-row>
+                    <b-row>
+                        <b-col>
+                            <ContentBlock
+                                v-for="block in job.content_blocks"
+                                :key="`${job.id}-${block.id}`"
+                                :type="block.block_type"
+                                :locale="currentLocale"
+                                :data="block"
+                            />
                         </b-col>
                     </b-row>
-                    <ContentBlock
-                        v-for="block in job.content_blocks"
-                        :key="`${job.id}-${block.id}`"
-                        :type="block.block_type"
-                        :locale="currentLocale"
-                        :data="block"
-                    />
                 </section>
             </div>
         </b-col>
         <b-col lg="4" class="small">
+            <no-ssr>
+                <aside class="social-share mt-1 mt-md-2">
+                    <social-sharing :url="this.canonicalUrl"
+                                    :title="this.job.title[this.currentLocale.code]"
+                                    :description="this.description"
+                                    :hashtags="this.hashtags"
+                                    inline-template>
+                        <div>
+                            <network network="twitter" class="">
+                                <fa :icon="['fab', 'twitter']" size="lg" />
+                            </network>
+                            <network network="facebook" class="">
+                                <fa :icon="['fab', 'facebook']" size="lg" />
+                            </network>
+                            <network network="linkedin" class="">
+                                <fa :icon="['fab', 'linkedin']" size="lg" />
+                            </network> 
+                            <network network="email" class="">
+                                <fa :icon="['far', 'envelope']" size="lg" />
+                            </network>
+                        </div>
+                    </social-sharing>
+                </aside>
+            </no-ssr>
             <h4 class="mb-3">{{ $t('job_page.meta.at_a_glance') }}</h4>
-            <p v-if="job.metadata.job_title">{{ $t('job_page.meta.job_title') }}: <strong>{{ job.metadata.job_title[currentLocale.code].content }}</strong></p>
+            <p v-if="jobTitle">{{ $t('job_page.meta.job_title') }}: <strong>{{ jobTitle }}</strong></p>
             <!-- <p>{{ $t('job_page.meta.institution') }}:<strong>{{ job.organization.ancestors.slice(1) | formatPath }}</strong></p> -->
             <p v-if="job.metadata.salary">{{ $t('job_page.meta.salary') }}: <strong>&euro; {{ job.metadata.salary }}</strong><span v-if="job.metadata.tax_status"> ({{ $t(`job_page.meta.tax_status.${job.metadata.tax_status}`) }})</span></p>
             <p v-if="job.metadata.deadline" :class="isExpired ? 'text-danger' : ''">
@@ -69,6 +72,7 @@
 <style lang="scss">
 .social-share {
     text-align: right;
+    float: right;
 
     span[data-link] {
         padding: 0 0.5rem;
@@ -146,11 +150,11 @@ export default {
         description() {
             const l = this.currentLocale.code;
             return `
-                ${this.$options.filters.formatPathLong([this.job.organization.ancestors.slice(1)[0]])}
-                ${{en:'seeks a', it:'cerca un/a'}[l]} ${this.job.metadata.job_title[l].content}
-                (${{en:'sector', it:'settore'}[l]} ${this.job.metadata.contest_sector} ${this.job.metadata.scientific_sector},
+                ${this.$options.filters.formatPathLong([this.job.organization.ancestors.length > 1 ? this.job.organization.ancestors.slice(1)[0] : this.job.organization.ancestors])}
+                ${{en:'seeks a', it:'cerca un/a'}[l]} ${this.jobTitle}
+                (${{en:'sector', it:'settore'}[l]} ${this.job.metadata.contest_sector && this.job.metadata.contest_sector.join(', ')}, ${this.job.metadata.scientific_sector && this.job.metadata.scientific_sector.join(', ')},
                 ${{en:'deadline', it:'scadenza'}[l]} ${this.$options.filters.formatDeadline(this.job.metadata.deadline, this.currentLocale)})
-                ${_truncate(this.job.content_blocks[0].body[l].content, { length: 200, omission: ' …', separator: ' ' })}
+                ${this.job.content_blocks.length > 0 && _truncate(this.job.content_blocks[0].body[l].content, { length: 200, omission: '…', separator: ' ' })}
             `.replace(/[\n\r]/gm, ' ').replace(/\s\s*/gm, ' ').trim();
         },
         canonicalUrl() {
@@ -159,7 +163,16 @@ export default {
         hashtags() {
             let hashtags = [this.job.organization.ancestors.length > 1 ? this.job.organization.ancestors[1].short_name : this.job.organization.ancestors[0].short_name, 'UniJobs'];
             return hashtags.filter((item, index, array) => array.indexOf(item) == index).join(',');
-        }
+        },
+        jobTitle() {
+            if (this.job.metadata.job_title) {
+                return this.$t(`job_titles.${this.job.metadata.job_title}`);
+            } else if (this.job.metadata.job_title_alt) {
+                return this.job.metadata.job_title_alt[this.$i18n.locale].content;
+            } else {
+                return '?';
+            }
+        },
     },
     validate({ params }) {
         return /^\d+$/.test(params.id);

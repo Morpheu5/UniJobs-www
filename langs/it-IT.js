@@ -35,7 +35,8 @@ module.exports = {
         description_h: 'Descrizione',
         job_title_h: 'Titolo',
         employer_h: 'Istituto',
-        scientific_sector_h: 'Settore',
+        contest_sector_h: 'Settore concorsuale',
+        scientific_sector_h: 'Settore scientifico-disciplinare',
         deadline_h: 'Scadenza',
         include_expired_h: 'Includi offerte scadute',
         report_job_title: 'Segnalaci offerte di lavoro',
@@ -62,6 +63,13 @@ module.exports = {
             deadline_expired_explanation: 'Il termine per presentare domanda è scaduto. In certi casi è possibile che l\'istituto accetti domande fuori scadenza, ma si consiglia di contattare direttamente la segreteria.',
             application_call_btn: 'Fai domanda!'
         }
+    },
+    job_titles: {
+        'ricercatore-tipo-a': 'Ricercatore (tipo A)',
+        'ricercatore-tipo-b': 'Ricercatore (tipo B)',
+        'professore-prima-fascia': 'Professore Ordinario',
+        'professore-seconda-fascia': 'Professore Associato',
+        '[object Object]': 'HAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAAHAAAAA',
     },
     read_more: 'Continua a leggere',
     user: 'Utente',
