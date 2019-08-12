@@ -11,7 +11,7 @@
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item :href="switchLocalePath(otherLocale.code)" class="d-none d-sm-block">{{ otherLocale.name }}</b-nav-item>
+                    <b-nav-item :href="switchLocalePath(otherLocale.code)" class="d-none d-sm-block language-selector">{{ otherLocale.name }}</b-nav-item>
 
                     <b-nav-item-dropdown v-if="loggedIn" :title="$t('user')" class="profile-menu" no-caret right>
                         <template slot="text"><fa :icon="['fas', 'smile']" size="lg" /></template>

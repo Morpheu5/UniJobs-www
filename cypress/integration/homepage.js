@@ -36,14 +36,11 @@ context('Homepage', () => {
     });
 
     it('changes the url when a different language is clicked', () => {
-      cy.get('.main-navbar').as('mainNavbar')
-        .find('.language-selector > a.dropdown-toggle')
-        .click();
+      cy.get('.main-navbar').as('mainNavbar');
       cy.get('@mainNavbar').find('.language-selector')
         .find('[href="/it"]').as('linko')
         .click();
       cy.get('@linko').click({force:true});
-      // FIXME: This test does not actually work as expected
       cy.url().should('contain', '/it');
     });
   });
