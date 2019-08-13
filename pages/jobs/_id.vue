@@ -12,8 +12,18 @@
                     <b-row align-v="start">
                         <b-col>
                             <p>
-                                <big v-if="job.metadata.contest_sector && job.metadata.contest_sector.length > 0"><b-badge variant="primary" v-for="s in job.metadata.contest_sector" :key="s">{{ s }}</b-badge></big>
-                                <big v-if="job.metadata.scientific_sector && job.metadata.scientific_sector.length > 0"><b-badge variant="primary" v-for="s in job.metadata.scientific_sector" :key="s">{{ s }}</b-badge></big>
+                                <big v-if="job.metadata.contest_sector && Array.isArray(job.metadata.contest_sector) && job.metadata.contest_sector.length > 0">
+                                    <b-badge variant="primary" v-for="s in job.metadata.contest_sector" :key="s">{{ s }}</b-badge>
+                                </big>
+                                <big v-else>
+                                    <b-badge variant="primary">{{ job.metadata.contest_sector }}</b-badge>
+                                </big>
+                                <big v-if="job.metadata.scientific_sector && Array.isArray(job.metadata.scientific_sector) && job.metadata.scientific_sector.length > 0">
+                                    <b-badge variant="primary" v-for="s in job.metadata.scientific_sector" :key="s">{{ s }}</b-badge>
+                                </big>
+                                <big v-else>
+                                    <b-badge variant="primary">{{ job.metadata.scientific_sector }}</b-badge>
+                                </big>
                             </p>
                         </b-col>
                     </b-row>
@@ -58,7 +68,6 @@
             </no-ssr>
             <h4 class="mb-3">{{ $t('job_page.meta.at_a_glance') }}</h4>
             <p v-if="jobTitle">{{ $t('job_page.meta.job_title') }}: <strong>{{ jobTitle }}</strong></p>
-            <!-- <p>{{ $t('job_page.meta.institution') }}:<strong>{{ job.organization.ancestors.slice(1) | formatPath }}</strong></p> -->
             <p v-if="job.metadata.salary">{{ $t('job_page.meta.salary') }}: <strong>&euro; {{ job.metadata.salary }}</strong><span v-if="job.metadata.tax_status"> ({{ $t(`job_page.meta.tax_status.${job.metadata.tax_status}`) }})</span></p>
             <p v-if="job.metadata.deadline" :class="isExpired ? 'text-danger' : ''">
                 {{ $t('job_page.meta.deadline') }}: <strong>{{ job.metadata.deadline | formatDeadline(currentLocale) }}</strong>
@@ -149,10 +158,12 @@ export default {
         },
         description() {
             const l = this.currentLocale.code;
+            const contest_sector = Array.isArray(this.job.metadata.contest_sector) ? this.job.metadata.contest_sector.join(',') : this.job.metadata.contest_sector;
+            const scientific_sector = Array.isArray(this.job.metadata.scientific_sector) ? this.job.metadata.scientific_sector.join(',') : this.job.metadata.scientific_sector;
             return `
                 ${this.$options.filters.formatPathLong([this.job.organization.ancestors.length > 1 ? this.job.organization.ancestors.slice(1)[0] : this.job.organization.ancestors])}
                 ${{en:'seeks a', it:'cerca un/a'}[l]} ${this.jobTitle}
-                (${{en:'sector', it:'settore'}[l]} ${this.job.metadata.contest_sector && this.job.metadata.contest_sector.join(', ')}, ${this.job.metadata.scientific_sector && this.job.metadata.scientific_sector.join(', ')},
+                (${{en:'sector', it:'settore'}[l]} ${contest_sector}, ${scientific_sector},
                 ${{en:'deadline', it:'scadenza'}[l]} ${this.$options.filters.formatDeadline(this.job.metadata.deadline, this.currentLocale)})
                 ${this.job.content_blocks.length > 0 && _truncate(this.job.content_blocks[0].body[l].content, { length: 200, omission: '…', separator: ' ' })}
             `.replace(/[\n\r]/gm, ' ').replace(/\s\s*/gm, ' ').trim();
