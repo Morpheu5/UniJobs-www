@@ -12,13 +12,13 @@
                     <b-row align-v="start">
                         <b-col>
                             <p>
-                                <big v-if="job.metadata.contest_sector && Array.isArray(job.metadata.contest_sector) && job.metadata.contest_sector.length > 0">
+                                <big v-if="job.metadata.contest_sector && Array.isArray(job.metadata.contest_sector)" v-show="job.metadata.contest_sector.length > 0">
                                     <b-badge variant="primary" v-for="s in job.metadata.contest_sector" :key="s">{{ s }}</b-badge>
                                 </big>
                                 <big v-else>
                                     <b-badge variant="primary">{{ job.metadata.contest_sector }}</b-badge>
                                 </big>
-                                <big v-if="job.metadata.scientific_sector && Array.isArray(job.metadata.scientific_sector) && job.metadata.scientific_sector.length > 0">
+                                <big v-if="job.metadata.scientific_sector && Array.isArray(job.metadata.scientific_sector)" v-show="job.metadata.scientific_sector.length > 0">
                                     <b-badge variant="primary" v-for="s in job.metadata.scientific_sector" :key="s">{{ s }}</b-badge>
                                 </big>
                                 <big v-else>
@@ -160,11 +160,12 @@ export default {
             const l = this.currentLocale.code;
             const contest_sector = Array.isArray(this.job.metadata.contest_sector) ? this.job.metadata.contest_sector.join(',') : this.job.metadata.contest_sector;
             const scientific_sector = Array.isArray(this.job.metadata.scientific_sector) ? this.job.metadata.scientific_sector.join(',') : this.job.metadata.scientific_sector;
+            const sectors = [contest_sector, scientific_sector].filter(item => item !== '').join(',');
+            const sectors_text = sectors !== '' ? `${{en:'sector', it:'settore'}[l]} ${sectors}, ` : '';
             return `
                 ${this.$options.filters.formatPathLong([this.job.organization.ancestors.length > 1 ? this.job.organization.ancestors.slice(1)[0] : this.job.organization.ancestors])}
                 ${{en:'seeks a', it:'cerca un/a'}[l]} ${this.jobTitle}
-                (${{en:'sector', it:'settore'}[l]} ${contest_sector}, ${scientific_sector},
-                ${{en:'deadline', it:'scadenza'}[l]} ${this.$options.filters.formatDeadline(this.job.metadata.deadline, this.currentLocale)})
+                (${sectors_text}${{en:'deadline', it:'scadenza'}[l]} ${this.$options.filters.formatDeadline(this.job.metadata.deadline, this.currentLocale)})
                 ${this.job.content_blocks.length > 0 && _truncate(this.job.content_blocks[0].body[l].content, { length: 200, omission: '…', separator: ' ' })}
             `.replace(/[\n\r]/gm, ' ').replace(/\s\s*/gm, ' ').trim();
         },
@@ -185,7 +186,7 @@ export default {
             } else if (this.job.metadata.job_title_alt) {
                 return this.job.metadata.job_title_alt[this.$i18n.locale].content;
             } else {
-                return '?';
+                return null;
             }
         },
     },

@@ -205,7 +205,7 @@ export default {
                 description: job.title[this.$i18n.locale],
                 contest_sector: Array.isArray(job.metadata.contest_sector) ? job.metadata.contest_sector : [job.metadata.contest_sector],
                 scientific_sector: Array.isArray(job.metadata.scientific_sector) ? job.metadata.scientific_sector : [job.metadata.scientific_sector],
-                job_title: job.metadata.job_title ? this.$t(`job_titles.${job.metadata.job_title}`) : (job.metadata.job_title_alt ? job.metadata.job_title_alt[this.$i18n.locale].content : 'N/A'),
+                job_title: job.metadata.job_title ? this.$t(`job_titles.${job.metadata.job_title}`) : (job.metadata.job_title_alt ? job.metadata.job_title_alt[this.$i18n.locale].content : ''),
                 employer: job.organization.ancestors.length > 1 ? job.organization.ancestors.slice(1) : job.organization.ancestors,
                 deadline: job.metadata.deadline,
             })).filter(this.filterTable);
