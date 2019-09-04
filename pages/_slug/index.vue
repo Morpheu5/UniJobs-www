@@ -1,20 +1,27 @@
 <template>
-    <b-row>
-        <b-col lg="8" offset-lg="2">
-            <div>
-                <h2 class="mb-5">{{ content.title[currentLocale.code] }}</h2>
-                <section class="content-description">
-                    <ContentBlock
-                        v-for="block in content.content_blocks"
-                        :key="`${content.id}-${block.id}`"
-                        :type="block.block_type"
-                        :locale="currentLocale"
-                        :data="block"
-                    />
-                </section>
-            </div>
-        </b-col>
-    </b-row>
+    <div>
+        <b-row>
+            <b-col lg="8" offset-lg="2">
+                <div>
+                    <h2 class="mb-5">{{ content.title[currentLocale.code] }}</h2>
+                    <section class="content-description">
+                        <ContentBlock
+                            v-for="block in content.content_blocks"
+                            :key="`${content.id}-${block.id}`"
+                            :type="block.block_type"
+                            :locale="currentLocale"
+                            :data="block"
+                        />
+                    </section>
+                </div>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
+                <adsbygoogle ad-slot="5861780748" />
+            </b-col>
+        </b-row>
+    </div>
 </template>
 
 <script>

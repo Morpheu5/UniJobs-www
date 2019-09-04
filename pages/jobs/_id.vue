@@ -74,6 +74,8 @@
             </p>
             <p><b-button :href="job.metadata.url[currentLocale.code].content" size="sm" variant="primary">{{ $t('job_page.meta.application_call_btn') }}</b-button></p>
             <p v-if="isExpired"><b-badge variant="warning text-white" pill>{{ $t('warning') }}</b-badge> {{ $t('job_page.meta.deadline_expired_explanation') }}</p>
+
+            <adsbygoogle ad-slot="7400247216" />
         </b-col>
     </b-row>
 </template>

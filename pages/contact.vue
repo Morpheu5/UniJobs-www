@@ -6,5 +6,10 @@
                 <div v-html="$t('contact_page.message')" />
             </b-col>
         </b-row>
+        <b-row>
+            <b-col>
+                <adsbygoogle ad-slot="5861780748" />
+            </b-col>
+        </b-row>
     </div>
 </template>

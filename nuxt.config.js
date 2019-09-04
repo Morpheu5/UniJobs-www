@@ -66,6 +66,12 @@ module.exports = {
         return process.env.NODE_ENV !== 'production';
       },
     }],
+    [ '@nuxtjs/google-adsense', {
+      id: 'ca-pub-5066013786478491',
+      analyticsUacct: 'UA-126329174-1',
+      analyticsDomainName: 'unijobs.it',
+      // test: true
+    }],
     [ '@digibytes/markdownit', {
       injected: true,
       html: true,
