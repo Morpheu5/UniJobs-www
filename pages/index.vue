@@ -213,7 +213,7 @@ export default {
                 job_title: job.metadata.job_title ? this.$t(`job_titles.${job.metadata.job_title}`) : (job.metadata.job_title_alt ? job.metadata.job_title_alt[this.$i18n.locale].content : ''),
                 employer: job.organization.ancestors.length > 1 ? job.organization.ancestors.slice(1) : job.organization.ancestors,
                 deadline: job.metadata.deadline,
-            })).filter(this.filterTable);
+            })).filter(this.filterTable).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
         }
     },
     asyncData({ app, _params, error }) {
