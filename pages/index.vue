@@ -11,8 +11,8 @@
                     <b-col cols="12" md="4">
                         <p class="job_title">{{ job.job_title }}</p>
                         <p class="sectors">
-                            <b-badge variant="primary" v-for="s in job.contest_sector" :key="s">{{ s }}</b-badge>
-                            <b-badge variant="primary" v-for="s in job.scientific_sector" :key="s">{{ s }}</b-badge>
+                            <b-badge class="mr-1" variant="primary" v-for="s in job.contest_sector" :key="s">{{ s }}</b-badge>
+                            <b-badge class="mr-1" variant="primary" v-for="s in job.scientific_sector" :key="s">{{ s }}</b-badge>
                         </p>
                         <p class="deadline" v-if="job.deadline"><fa :icon="['far', 'calendar-alt']" class="mr-2 text-muted" /> {{ job.deadline | formatDeadline($i18n.locale) }}</p>
                     </b-col>
