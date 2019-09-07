@@ -14,16 +14,16 @@
                         <b-col>
                             <p>
                                 <big v-if="job.metadata.contest_sector && Array.isArray(job.metadata.contest_sector)" v-show="job.metadata.contest_sector.length > 0">
-                                    <b-badge variant="primary" v-for="s in job.metadata.contest_sector" :key="s">{{ s }}</b-badge>
+                                    <b-badge class="mr-1" variant="primary" v-for="s in job.metadata.contest_sector" :key="s">{{ s }}</b-badge>
                                 </big>
                                 <big v-else>
-                                    <b-badge variant="primary">{{ job.metadata.contest_sector }}</b-badge>
+                                    <b-badge class="mr-1" variant="primary">{{ job.metadata.contest_sector }}</b-badge>
                                 </big>
                                 <big v-if="job.metadata.scientific_sector && Array.isArray(job.metadata.scientific_sector)" v-show="job.metadata.scientific_sector.length > 0">
-                                    <b-badge variant="primary" v-for="s in job.metadata.scientific_sector" :key="s">{{ s }}</b-badge>
+                                    <b-badge class="mr-1" variant="primary" v-for="s in job.metadata.scientific_sector" :key="s">{{ s }}</b-badge>
                                 </big>
                                 <big v-else>
-                                    <b-badge variant="primary">{{ job.metadata.scientific_sector }}</b-badge>
+                                    <b-badge class="mr-1" variant="primary">{{ job.metadata.scientific_sector }}</b-badge>
                                 </big>
                             </p>
                         </b-col>
