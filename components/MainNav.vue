@@ -28,12 +28,6 @@
 <script>
 export default {
     computed: {
-        localeName() {
-            return 'ahha';
-        },
-        loggedIn() {
-            return null !== this.$store.state.unijobs_magic_token;
-        },
         otherLocale() {
             return this.$i18n.locales.filter(l => l.code !== this.currentLocale.code)[0];
         }

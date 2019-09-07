@@ -107,6 +107,8 @@ module.exports = {
     other_gender: 'Other',
     unspecified_gender: 'Prefer not to say',
 
+    edit: 'Edit',
+
     errors: {
         server_says: 'Server says',
         

@@ -46,8 +46,12 @@ module.exports = {
   ],
   router: {
     middleware: [
+      'whoami',
       'prepend_locale',
     ],
+  },
+  env: {
+    editorBaseUrl: process.env.EDITOR_URL || 'http://localhost:8081'
   },
   modules: [
     [ '@nuxtjs/axios', {
@@ -107,7 +111,8 @@ module.exports = {
             'faExclamationTriangle',
             'faTimes',
             'faArrowRight',
-            'faArrowCircleRight'
+            'faArrowCircleRight',
+            'faEdit'
           ]
         },
         {

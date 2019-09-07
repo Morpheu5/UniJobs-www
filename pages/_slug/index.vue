@@ -3,7 +3,10 @@
         <b-row>
             <b-col lg="8" offset-lg="2">
                 <div>
-                    <h2 class="mb-5">{{ content.title[currentLocale.code] }}</h2>
+                    <h2 class="mb-5">
+                        <a v-if="loggedIn && ['ADMIN', 'EDITOR'].includes(userRole)" :href="editorUrl"><small><fa :icon="['fas', 'edit']" size="lg" /></small></a>
+                        {{ content.title[currentLocale.code] }}
+                    </h2>
                     <section class="content-description">
                         <ContentBlock
                             v-for="block in content.content_blocks"
@@ -52,6 +55,9 @@ export default {
         description() {
             const l = this.currentLocale.code;
             return _truncate(`${this.content.content_blocks[0].body[l].content}`, { length: 200, omission: '…', separator: ' ' }).replace(/[\n\r]/gm, ' ');
+        },
+        editorUrl() {
+            return `${process.env.editorBaseUrl}/contents/${this.content.id}/edit`;
         }
     },
     asyncData({ app, error, params }) {

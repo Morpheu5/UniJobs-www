@@ -2,6 +2,7 @@ import cookieparser from 'cookieparser';
 
 export const state = () => ({
     unijobs_magic_token: null,
+    user_role: null,
     www_environment: null,
     www_version: null,
 });
@@ -14,6 +15,9 @@ export const mutations = {
         } else {
             this.$cookies.remove('unijobs_magic_token');
         }
+    },
+    updateUserRole(state, role = null) {
+        state.user_role = role;
     },
     www_environment(state, env = null) {
         state.www_environment = env;

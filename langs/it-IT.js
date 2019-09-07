@@ -108,6 +108,8 @@ module.exports = {
     other_gender: 'Altro',
     unspecified_gender: 'Preferisco non dirlo',
 
+    edit: 'Modifica',
+
     errors: {
         server_says: 'Il server dice',
         

@@ -5,6 +5,7 @@
                 <b-badge v-if="isExpired" variant="danger text-white" pill>{{ $t('job_page.meta.deadline_expired') }}</b-badge>
                 <aside class="heading-organization"><strong>{{ job.organization.ancestors.slice(1) | formatPathLong }}</strong></aside>
                 <h2 class="mb-2 mb-md-5">
+                    <a v-if="loggedIn && ['ADMIN', 'EDITOR'].includes(userRole)" :href="editorUrl"><small><fa :icon="['fas', 'edit']" size="lg" /></small></a>
                     {{ job.title[currentLocale.code] }}
                 </h2>
 
@@ -191,6 +192,9 @@ export default {
                 return null;
             }
         },
+        editorUrl() {
+            return `${process.env.editorBaseUrl}/contents/${this.job.id}/edit`;
+        }
     },
     validate({ params }) {
         return /^\d+$/.test(params.id);
