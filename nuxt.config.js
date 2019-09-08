@@ -74,6 +74,7 @@ module.exports = {
       id: 'ca-pub-5066013786478491',
       analyticsUacct: 'UA-126329174-1',
       analyticsDomainName: 'unijobs.it',
+      pageLevelAds: false,
       // test: true
     }],
     [ '@digibytes/markdownit', {

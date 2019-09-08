@@ -6,9 +6,9 @@
                 <div v-html="$t('contact_page.message')" />
             </b-col>
         </b-row>
-        <b-row>
+        <b-row class="clearfix" style="display: block">
             <b-col>
-                <adsbygoogle ad-slot="5861780748" />
+                <adsbygoogle ad-slot="5861780748" style="max-height: 90px" />
             </b-col>
         </b-row>
     </div>
