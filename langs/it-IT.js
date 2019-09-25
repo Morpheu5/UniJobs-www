@@ -63,6 +63,7 @@ module.exports = {
         }
     },
     job_titles: {
+        'borsista': 'Borsista',
         'ricercatore-tipo-a': 'Ricercatore (tipo A)',
         'ricercatore-tipo-b': 'Ricercatore (tipo B)',
         'professore-prima-fascia': 'Professore Ordinario',
