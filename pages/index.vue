@@ -4,11 +4,14 @@
             <b-col>
                 <!-- List of jobs -->
                 <b-row :class="`mt-0 mt-lg-3 py-3 job ${i === jobsTable.length-1 && 'last'}`" v-show="jobsTable.length > 0" v-for="(job, i) in jobsTable" :key="job.id">
-                    <b-col cols="12" md="8">
+                    <b-col cols="3" md="1" order="2" order-md="1">
+                        <b-img v-if="job.logo_url" fluid rounded :src="job.logo_url | cdnUrl" />
+                    </b-col>
+                    <b-col cols="9" md="8" order="1" order-md="2">
                         <p class="description"><nuxt-link :to="localePath({ name: 'jobs-id', params: { id: job.id }})">{{ job.description }}</nuxt-link></p>
                         <p class="employer" v-html="$options.filters.formatPath(job.employer)"></p>
                     </b-col>
-                    <b-col cols="12" md="4">
+                    <b-col cols="12" md="3" order="3" order-md="3">
                         <p class="job_title">{{ job.job_title }}</p>
                         <p class="sectors">
                             <b-badge class="mr-1" variant="primary" v-for="s in job.contest_sector" :key="s">{{ s }}</b-badge>
@@ -212,13 +215,14 @@ export default {
                 scientific_sector: Array.isArray(job.metadata.scientific_sector) ? job.metadata.scientific_sector : [job.metadata.scientific_sector],
                 job_title: job.metadata.job_title ? this.$t(`job_titles.${job.metadata.job_title}`) : (job.metadata.job_title_alt ? job.metadata.job_title_alt[this.$i18n.locale].content : ''),
                 employer: job.organization.ancestors.length > 1 ? job.organization.ancestors.slice(1) : job.organization.ancestors,
+                logo_url: job.organization.logo_url || job.organization.ancestors.map(a => a.logo_url).filter(u => u).reverse()[0],
                 deadline: job.metadata.deadline,
             })).filter(this.filterTable).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
         }
     },
     asyncData({ app, _params, error }) {
         return app.$axios
-            .get('/api/contents?content_type=job')
+            .get('/contents?content_type=job')
             .then(res => {
                 return { jobs: res.data };
             })
@@ -246,7 +250,7 @@ export default {
             if (this.reportJobUrl === '') {
                 return;
             }
-            this.$axios.post('/api/job_reporting', { data: { url: this.reportJobUrl } })
+            this.$axios.post('/job_reporting', { data: { url: this.reportJobUrl } })
                 .then(_response => {
                     this.reportJobOutcome = 'success';
                     this.reportJobUrl = '';

@@ -62,7 +62,7 @@ export default {
     },
     asyncData({ app, error, params }) {
         return app.$axios
-            .get(`/api/contents/slug/${params.slug}`)
+            .get(`/contents/slug/${params.slug}`)
             .then(res => {
                 return { content: res.data };
             })

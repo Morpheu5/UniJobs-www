@@ -51,7 +51,8 @@ module.exports = {
     ],
   },
   env: {
-    editorBaseUrl: process.env.EDITOR_URL || 'http://localhost:8081'
+    editorBaseUrl: process.env.EDITOR_URL || 'http://localhost:8081',
+    cdnBaseUrl: process.env.CDN_URL || 'http://localhost:3000'
   },
   modules: [
     [ '@nuxtjs/axios', {

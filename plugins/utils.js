@@ -1,6 +1,15 @@
 import Vue from 'vue';
 
 Vue.mixin({
+    filters: {
+        cdnUrl(url) {
+            if (url) {
+                return process.env.cdnBaseUrl + url;
+            } else {
+                return null;
+            }
+        }
+    },
     computed: {
         currentLocale() {
             return this.$i18n.locales.find((e) => e.code === this.$i18n.locale);

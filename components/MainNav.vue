@@ -35,7 +35,7 @@ export default {
     methods: {
         doTheLogout() {
             this.$axios
-                .post('/api/logout', null, { headers: { 'Authorization': `Bearer ${this.$store.state.unijobs_magic_token}` } })
+                .post('/logout', null, { headers: { 'Authorization': `Bearer ${this.$store.state.unijobs_magic_token}` } })
                 .then(_response => {
                     this.$store.commit('updateAuthToken', null);
                     this.$router.push({ path: '/' });

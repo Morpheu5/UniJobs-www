@@ -201,7 +201,7 @@ export default {
     },
     asyncData({ app, params, error }) {
         return app.$axios
-            .get(`/api/contents/${params.id}?content_type=job`)
+            .get(`/contents/${params.id}?content_type=job`)
             .then(res => {
                 return { job: res.data };
             })

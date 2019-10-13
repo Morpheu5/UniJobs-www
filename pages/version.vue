@@ -13,7 +13,7 @@
 <script>
 export default {
     async asyncData({ app }) {
-        const jobsResponse = await app.$axios.get('/api');
+        const jobsResponse = await app.$axios.get('');
         return {
             api: jobsResponse.data,
         };
