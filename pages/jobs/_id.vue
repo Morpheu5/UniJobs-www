@@ -43,7 +43,7 @@
             </div>
         </b-col>
         <b-col lg="4" class="small">
-            <no-ssr>
+            <client-only>
                 <aside class="social-share mt-1 mt-md-2">
                     <social-sharing :url="this.canonicalUrl"
                                     :title="this.job.title[this.currentLocale.code]"
@@ -66,7 +66,7 @@
                         </div>
                     </social-sharing>
                 </aside>
-            </no-ssr>
+            </client-only>
             <h4 class="mb-3">{{ $t('job_page.meta.at_a_glance') }}</h4>
             <p v-if="jobTitle">{{ $t('job_page.meta.job_title') }}: <strong>{{ jobTitle }}</strong></p>
             <p v-if="job.metadata.salary">{{ $t('job_page.meta.salary') }}: <strong>&euro; {{ job.metadata.salary }}</strong><span v-if="job.metadata.tax_status"> ({{ $t(`job_page.meta.tax_status.${job.metadata.tax_status}`) }})</span></p>
@@ -127,9 +127,11 @@ export default {
                 { name: 'og:description', content: this.description },
                 { name: 'og:type', content: 'website' },
                 { name: 'og:url', content: this.canonicalUrl },
+                { name: 'og:image', content: this.$options.filters.cdnUrl(this.logo_url) },
                 { name: 'og:locale', content: this.currentLocale.iso.replace('-', '_') },
                 { name: 'twitter:site', content: '@unijobsit' },
-                { name: 'twitter:card', content: 'summary' }
+                { name: 'twitter:card', content: 'summary' },
+                { name: 'twitter:image', content: this.$options.filters.cdnUrl(this.logo_url) },
             ]
         };
     },
@@ -203,7 +205,10 @@ export default {
         return app.$axios
             .get(`/contents/${params.id}?content_type=job`)
             .then(res => {
-                return { job: res.data };
+                return {
+                    job: res.data,
+                    logo_url: res.data.organization.logo_url || res.data.organization.ancestors.map(a => a.logo_url).filter(u => u).reverse()[0]
+                };
             })
             .catch(e => {
                 if (e.response) {
