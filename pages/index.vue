@@ -208,16 +208,27 @@ export default {
     },
     computed: {
         jobsTable() {
-            return this.jobs.map(job => ({
-                id: job.id,
-                description: job.title[this.$i18n.locale],
-                contest_sector: Array.isArray(job.metadata.contest_sector) ? job.metadata.contest_sector : [job.metadata.contest_sector],
-                scientific_sector: Array.isArray(job.metadata.scientific_sector) ? job.metadata.scientific_sector : [job.metadata.scientific_sector],
-                job_title: job.metadata.job_title ? this.$t(`job_titles.${job.metadata.job_title}`) : (job.metadata.job_title_alt ? job.metadata.job_title_alt[this.$i18n.locale].content : ''),
-                employer: job.organization.ancestors.length > 1 ? job.organization.ancestors.slice(1) : job.organization.ancestors,
-                logo_url: job.organization.logo_url || job.organization.ancestors.map(a => a.logo_url).filter(u => u).reverse()[0],
-                deadline: job.metadata.deadline,
-            })).filter(this.filterTable).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            return this.jobs.map(job => {
+                const l = this.$i18n.locale;
+                let job_title = '?';
+                if (job.metadata.job_title) {
+                    job_title = this.$t(`job_titles.${job.metadata.job_title}`);
+                } else {
+                    if (job.metadata.job_title_alt && job.metadata.job_title_alt[l]) {
+                        job_title = job.metadata.job_title_alt[l].content || '?!';
+                    }
+                }
+                return {
+                    id: job.id,
+                    description: job.title[this.$i18n.locale],
+                    contest_sector: Array.isArray(job.metadata.contest_sector) ? job.metadata.contest_sector : [job.metadata.contest_sector],
+                    scientific_sector: Array.isArray(job.metadata.scientific_sector) ? job.metadata.scientific_sector : [job.metadata.scientific_sector],
+                    job_title: job_title,
+                    employer: job.organization.ancestors.length > 1 ? job.organization.ancestors.slice(1) : job.organization.ancestors,
+                    logo_url: job.organization.logo_url || job.organization.ancestors.map(a => a.logo_url).filter(u => u).reverse()[0],
+                    deadline: job.metadata.deadline,
+                };
+            }).filter(this.filterTable).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
         }
     },
     asyncData({ app, _params, error }) {
