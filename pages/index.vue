@@ -2,6 +2,63 @@
     <div id="jobs_list" class="mb-5">
         <b-row>
             <b-col>
+                <b-alert v-if="currentLocale.iso == 'en-GB'" variant="danger" show>
+                    <h4>PLEASE READ: UniJobs.it is on holiday</h4>
+                    <p>
+                        This website has been running semi-manually for the
+                        past few months, and it has reached a reasonable amount
+                        of people from such a cold start.
+                    </p>
+                    <p>
+                        There is a <a href="https://blog.morpheu5.net/unijobs-it-e-le-cose-che-si-imparano/">blog post</a>
+                        that explains how this website came about. It is in
+                        Italian only, but you would be surprised how good
+                        Google Translate has become &mdash; how did you think
+                        the job offers were translated from Italian otherwise? 😉
+                    </p>
+                    <p>
+                        UniJobs.it should return at some point in January, but
+                        it will suffer from the same pains detailed in that blog.
+                        If you can help, or have any ideas to improve the running
+                        of the website, please feel free to get in touch!
+                    </p>
+                    <b-button
+                        :to="localePath({ name: 'slug', params: { slug: 'help-us'} })"
+                        variant="primary">
+                        Get in touch
+                    </b-button>
+                </b-alert>
+                <b-alert v-if="currentLocale.iso == 'it-IT'" variant="danger" show>
+                    <h4>IMPORTANTE: UniJobs.it va in vacanza</h4>
+                    <p>
+                        Questo sito ha funzionato in modo semi-manuale negli
+                        ultimi mesi, e ha raggiunto un numero di persone più
+                        che ragionevole, considerando la partenza a freddo.
+                    </p>
+                    <p>
+                        C'è un <a href="https://blog.morpheu5.net/unijobs-it-e-le-cose-che-si-imparano/">post</a>
+                        che spiega l'origine di questo sito. È in italiano, ma
+                        sareste sorpresi dallo scoprire quanto bene funziona
+                        Google Translate &mdash; come pensavate che venissero
+                        tradotti i bandi dall'italiano all'inglese altrimenti? 😉
+                    </p>
+                    <p>
+                        UniJobs.it dovrebbe tornare operativo da gennaio, ma
+                        avrà gli stessi problemi che sono descritti in quel
+                        post. Se potete dare una mano, o se avete idee per
+                        migliorare la gestione di questo sito, siete più che
+                        benvenuti!
+                    </p>
+                    <b-button
+                        :to="localePath({ name: 'slug', params: { slug: 'help-us'} })"
+                        variant="primary">
+                        Contattaci
+                    </b-button>
+                </b-alert>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
                 <!-- List of jobs -->
                 <b-row :class="`mt-0 mt-lg-3 py-3 job ${i === jobsTable.length-1 && 'last'}`" v-show="jobsTable.length > 0" v-for="(job, i) in jobsTable" :key="job.id">
                     <b-col cols="3" md="1" order="2" order-md="1">
