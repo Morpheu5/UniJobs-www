@@ -212,19 +212,6 @@
 
 <script>
 export default {
-    head() {
-        const description = {
-            it: 'Offerte di lavoro nella Ricerca in Italia presentate in modo chiaro.',
-            en: 'Research job offers in Italy, presented clearly.'
-        }[this.currentLocale.code];
-        return {
-            title: `UniJobs.it — ${this.$t('headline')}`,
-            meta: [
-                { name: 'description', hid: 'description', content: description },
-                { name: 'og:description', content: description }
-            ]
-        };
-    },
     filters: {
         formatPath(path) {
             return path ? path.map((e, i, a) => (i < a.length-1 ? `<span class="short_name">${e.name}</span>` : `<span class="name long_name">${e.name}</span>`)).join('') : '';
@@ -244,6 +231,20 @@ export default {
         formatTags(tags) {
             return tags ? tags.map(tag => `<b-badge pill variant="primary">${tag}</b-badge>`) : '';
         }
+    },
+    asyncData({ app, _params, error }) {
+        return app.$axios
+            .get('/contents?content_type=job')
+            .then(res => {
+                return { jobs: res.data };
+            })
+            .catch(e => {
+                if (e.response) {
+                    error({ statusCode: e.response.data.status, message: e.response.data.error });
+                } else {
+                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
+                }
+            });
     },
     data() {
         return {
@@ -288,20 +289,6 @@ export default {
             }).filter(this.filterTable).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
         }
     },
-    asyncData({ app, _params, error }) {
-        return app.$axios
-            .get('/contents?content_type=job')
-            .then(res => {
-                return { jobs: res.data };
-            })
-            .catch(e => {
-                if (e.response) {
-                    error({ statusCode: e.response.data.status, message: e.response.data.error });
-                } else {
-                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
-                }
-            });
-    },
     methods: {
         filterTable(job, _index, _jobs) {
             // FIXME The employer part needs tokenization. Perhaps build another function.
@@ -328,6 +315,19 @@ export default {
                 });
             return false;
         }
+    },
+    head() {
+        const description = {
+            it: 'Offerte di lavoro nella Ricerca in Italia presentate in modo chiaro.',
+            en: 'Research job offers in Italy, presented clearly.'
+        }[this.currentLocale.code];
+        return {
+            title: `UniJobs.it — ${this.$t('headline')}`,
+            meta: [
+                { name: 'description', hid: 'description', content: description },
+                { name: 'og:description', content: description }
+            ]
+        };
     }
 };
 </script>

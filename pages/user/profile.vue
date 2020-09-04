@@ -141,6 +141,14 @@ export default {
             return path ? path.map((e, i, a) => (i < a.length-1 ? `<span class="short_name">${e.short_name}</span>` : `<span class="name long_name">${e.name} (${e.short_name})</span>`)).join('') : '';
         }
     },
+    async asyncData({ app }) {
+        const whoami = await app.$axios.get('/users/whoami');
+        const { data } = await app.$axios.get(`/users/${whoami.data.id}`);
+        const organizations = data.organizations.map(o => o.ancestors);
+        return {
+            user: { ...data, organizations: organizations }
+        };
+    },
     data() {
         return {
             genders: [
@@ -160,14 +168,6 @@ export default {
             changePasswordFormValidated: false,
             passwordsMatch: false,
             passwordChanged: false
-        };
-    },
-    async asyncData({ app }) {
-        const whoami = await app.$axios.get('/users/whoami');
-        const { data } = await app.$axios.get(`/users/${whoami.data.id}`);
-        const organizations = data.organizations.map(o => o.ancestors);
-        return {
-            user: { ...data, organizations: organizations }
         };
     },
     methods: {

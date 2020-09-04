@@ -36,6 +36,29 @@ export default {
     components: {
         ContentBlock
     },
+    asyncData({ app, error, params }) {
+        return app.$axios
+            .get(`/contents/slug/${params.slug}`)
+            .then(res => {
+                return { content: res.data };
+            })
+            .catch(e => {
+                if (e.response) {
+                    error({ statusCode: e.response.data.status, message: e.response.data.error });
+                } else {
+                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
+                }
+            });
+    },
+    computed: {
+        description() {
+            const l = this.currentLocale.code;
+            return _truncate(`${this.content.content_blocks[0].body[l].content}`, { length: 200, omission: '…', separator: ' ' }).replace(/[\n\r]/gm, ' ');
+        },
+        editorUrl() {
+            return `${process.env.editorBaseUrl}/contents/${this.content.id}/edit`;
+        }
+    },
     head() {
         return {
             title: this.content.title[this.currentLocale.code] + " — UniJobs.it",
@@ -50,29 +73,6 @@ export default {
                 { name: 'twitter:card', content: 'summary' }
             ]
         };
-    },
-    computed: {
-        description() {
-            const l = this.currentLocale.code;
-            return _truncate(`${this.content.content_blocks[0].body[l].content}`, { length: 200, omission: '…', separator: ' ' }).replace(/[\n\r]/gm, ' ');
-        },
-        editorUrl() {
-            return `${process.env.editorBaseUrl}/contents/${this.content.id}/edit`;
-        }
-    },
-    asyncData({ app, error, params }) {
-        return app.$axios
-            .get(`/contents/slug/${params.slug}`)
-            .then(res => {
-                return { content: res.data };
-            })
-            .catch(e => {
-                if (e.response) {
-                    error({ statusCode: e.response.data.status, message: e.response.data.error });
-                } else {
-                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
-                }
-            });
     }
 };
 </script>

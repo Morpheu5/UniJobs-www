@@ -118,23 +118,6 @@ export default {
     components: {
         ContentBlock
     },
-    head() {
-        return {
-            title: this.job.title[this.currentLocale.code] + " — UniJobs.it",
-            meta: [
-                { name: 'description', hid: 'description', content: this.description },
-                { name: 'og:title', content: this.job.title[this.currentLocale.code] },
-                { name: 'og:description', content: this.description },
-                { name: 'og:type', content: 'website' },
-                { name: 'og:url', content: this.canonicalUrl },
-                { name: 'og:image', content: this.$options.filters.cdnUrl(this.logo_url) },
-                { name: 'og:locale', content: this.currentLocale.iso.replace('-', '_') },
-                { name: 'twitter:site', content: '@unijobsit' },
-                { name: 'twitter:card', content: 'summary' },
-                { name: 'twitter:image', content: this.$options.filters.cdnUrl(this.logo_url) },
-            ]
-        };
-    },
     filters: {
         formatPath(path) {
             return path ? path.map((e, i, a) => (i < a.length-1 ? e.short_name : e.name)).join(' › ') : '';
@@ -154,6 +137,23 @@ export default {
                 timeZoneName: 'short'
             });
         }
+    },
+    asyncData({ app, params, error }) {
+        return app.$axios
+            .get(`/contents/${params.id}?content_type=job`)
+            .then(res => {
+                return {
+                    job: res.data,
+                    logo_url: res.data.organization.logo_url || res.data.organization.ancestors.map(a => a.logo_url).filter(u => u).reverse()[0]
+                };
+            })
+            .catch(e => {
+                if (e.response) {
+                    error({ statusCode: e.response.data.status, message: e.response.data.error });
+                } else {
+                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
+                }
+            });
     },
     computed: {
         isExpired() {
@@ -198,25 +198,25 @@ export default {
             return `${process.env.editorBaseUrl}/contents/${this.job.id}/edit`;
         }
     },
+    head() {
+        return {
+            title: this.job.title[this.currentLocale.code] + " — UniJobs.it",
+            meta: [
+                { name: 'description', hid: 'description', content: this.description },
+                { name: 'og:title', content: this.job.title[this.currentLocale.code] },
+                { name: 'og:description', content: this.description },
+                { name: 'og:type', content: 'website' },
+                { name: 'og:url', content: this.canonicalUrl },
+                { name: 'og:image', content: this.$options.filters.cdnUrl(this.logo_url) },
+                { name: 'og:locale', content: this.currentLocale.iso.replace('-', '_') },
+                { name: 'twitter:site', content: '@unijobsit' },
+                { name: 'twitter:card', content: 'summary' },
+                { name: 'twitter:image', content: this.$options.filters.cdnUrl(this.logo_url) },
+            ]
+        };
+    },
     validate({ params }) {
         return /^\d+$/.test(params.id);
-    },
-    asyncData({ app, params, error }) {
-        return app.$axios
-            .get(`/contents/${params.id}?content_type=job`)
-            .then(res => {
-                return {
-                    job: res.data,
-                    logo_url: res.data.organization.logo_url || res.data.organization.ancestors.map(a => a.logo_url).filter(u => u).reverse()[0]
-                };
-            })
-            .catch(e => {
-                if (e.response) {
-                    error({ statusCode: e.response.data.status, message: e.response.data.error });
-                } else {
-                    error({ statusCode: 500, message: `${e.code} ${e.address}:${e.port}` });
-                }
-            });
     }
 };
 </script>

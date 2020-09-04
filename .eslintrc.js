@@ -26,4 +26,4 @@ module.exports = {
     'vue/order-in-components': 'error',
     'semi': ['error', 'always'],
   },
-}
+};
