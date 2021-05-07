@@ -28,7 +28,7 @@
     "cookie-universal-nuxt": "^2.1.4",
     "cookieparser": "^0.1.0",
     "debug": "^4.1.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "nuxt": "^2.14.4",
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-i18n": "^6.13.12",
